@@ -1,9 +1,7 @@
-import random
-import time
+
 import re
-import json
+import time
 import openai
-import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -43,10 +41,32 @@ class Searcher(object):
     def login(self, platform):
         if platform == "LinkedIn":
             self.driver.get("https://www.linkedin.com/login")
-            self.write("//input[@id='username']", "bilan604@yahoo.com")
-            self.write("//input[@id='password']", "6047822691aA")
+            self.write("//input[@id='username']", "")
+            self.write("//input[@id='password']", "")
             self.click("//button[@class='btn__primary--large from__button--floating']")
     
+    def get_insights(self, url):
+        if url[-1] == "/":
+            url = url[:-1]
+        self.driver.get(url + "/people/")
+        self.write("//input[@id='people-search-keywords']", "engineer")
+        self.write("//input[@id='people-search-keywords']", Keys.ENTER)
+        
+        waiter = self.get_waited("//div[@class='insight-container__title']")
+
+        soup = BeautifulSoup(self.driver.page_source, 'html.parser')
+        
+        people = soup.find_all('h2', {"class": "t-20 t-black t-bold"})
+        people = list(map(str, people))
+        people = [re.sub("<.+?>", "", p).strip() for p in people]
+        print(people, "people--")
+        
+        by_region = soup.find_all("div", {"class": "org-people-bar-graph-element__percentage-bar-info truncate full-width mt2 mb1 t-14 t-black--light t-normal"})
+        by_region = list(map(str, by_region))
+        by_region = [re.sub("<.+?>", " ", br).strip() for br in by_region]
+        by_region = [br.split("\n")[0].strip() for br in by_region if "United States" in br]
+        print(by_region,"by_region")
+        time.sleep(20)
 
 
 def load_company_insights(id, profile_url):
