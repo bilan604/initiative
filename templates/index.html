@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>If I had a Nickel for every Programming Language I've Learned</title>
+  <title>Initiative API Landing Page</title>
   <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet"  />
   <script>
 
@@ -27,17 +27,18 @@
         
     function onMouseMove(e) {
         const gallery = document.getElementById("gallery");
-        const dwindowratio = (e.clientX - gallery.startClick) / window.innerWidth;
-        const newratio = 130 * dwindowratio;
-        const newpos = newratio + gallery.oldpos;
+        
         if (gallery.mousedown == "true") {
+            const dwindowratio = (e.clientX - gallery.startClick) / window.innerWidth;
+            const newratio = 100 * dwindowratio;
+            const newpos = newratio + gallery.oldpos;
             gallery.animate(
-                {transform: 'translate(-' + Math.min(100, Math.max(0, newpos)) +'%, -50%)'}, 
+                {transform: 'translate(-' + Math.min(100, Math.max(0, newpos)) +'%, -60%)'}, 
                 {duration: 1200, fill: 'forwards'}
             );
 
             const np = Math.min(100, Math.max(0, (100-(1.5*newpos.toFixed(0)))));
-            const images = gallery.getElementsByClassName("image");
+            const images = gallery.getElementsByClassName("gallery_image");
             for (let i = 0; i < images.length; i++) {
                 images[i].animate(
                 {objectPosition: np + '% 50%'},
@@ -48,13 +49,11 @@
     }
     
     function onMouseEnter(e) {
-        /*var element = document.getElementById("test-display");
-        element.innerHTML = "<div>Mouse Inside | Inside another div</div>";*/
+        /*var element = document.getElementById("test-display");*/
     }
     
     function onMouseOut(e) {
-        /*var element = document.getElementById("test-display");
-        element.innerHTML = "Mouse Outside";*/
+        /*var element = document.getElementById("test-display");*/
     }
     
 </script>
@@ -66,14 +65,14 @@
     <div id="intro">
 
         <h1>Initiative API</h1>
-        <p>Project Experience</p>
-        <ul id="tech-stack">
+        <p>This landing page is a placehold for now</p>
+        <ul id="urls_for_now">
             <li>
-                <a id="constant_time_search" href="https://colab.research.google.com/drive/1f7tsxsHfJgXZ9JbrUYq2aRlTO2rqtLTH?usp=sharing">Constant Time Search</a>
+                <a id="linkedin" href="https://www.linkedin.com/in/bill-lan-6aaa01147/">LinkedIn URL</a>
             </li>
             
             <li>
-                <a id="automatic_data_science" href="https://colab.research.google.com/drive/1c_wFdg_MyLFYCHjqLVFvLqUyeQaJ5Sga?usp=sharing">Automatic Data Science</a>
+                <a id="github" href="https://github.com/bilan604">Github URL</a>
             </li>
             
         </ul>

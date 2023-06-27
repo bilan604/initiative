@@ -22,31 +22,35 @@ operationFunctionsMap = {
     "answer_input_questions": do_answer_input_questions,
     # Utility function
     "get_search_result_links": get_search_result_urls,
+
+    "get_company_insights": get_company_insights
 }
 
 
 def operationFunctionHandler(requestorId, operation, requestData):
-    print("requestorId, operation:", requestorId, operation)
-    if operation not in operationFunctionsMap:
-        return "Invalid operation"
-    
+    print("requestorId:", requestorId)
+    print("operation:", operation)
+    print("requestData:", requestData)
     return operationFunctionsMap[operation](requestorId, requestData)
 
 
 @app.route("/api/", methods=("GET", "POST"))
-def inputQuestionsAPI():
-    print("Function call, inputQuestionsAPI()")
+def api():
+    print("Function call, api()")
     if request.method == "GET":
-        userId = request.args.get("userId")
+        userId = request.args.get("id")
         operation = request.args.get("operation")
-        requestData = request.args.get("requestData")
+        requestData = json.loads(request.args.get("requestData"))
+        print("GET", userId, operation, requestData)
         appResponse = operationFunctionHandler(userId, operation, requestData)
-        print(f"{appResponse=}\n -----^app response")
         return json.dumps(appResponse)
-    
     elif request.method == "POST":
         data = request.json
-        return operationFunctionHandler(data["id"], data["operation"], data["requestData"])
+        userId = data.get("id", "")
+        operation = data.get("operation", "")
+        requestData = data.get("requestData", "")
+        print("POST", userId, operation, requestData)
+        return operationFunctionHandler(userId, operation, requestData)
     
     return "None"
 

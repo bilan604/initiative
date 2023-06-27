@@ -85,11 +85,11 @@
     text-align: center;
     cursor: pointer;
   }
-  .image {
+  .gallery_image {
     height: 50vmin;
     width: 50vmin;
     object-fit: cover;
-    object-position: 100% 50%;
+    object-position: 100% 0%;
     user-select: none;
   }
   #gallery {
@@ -101,7 +101,7 @@
     padding: 15px 15px;
     border-radius: 25px;
     background-color: black;
-    transform: translate(0%, -44%);
+    transform: translate(0%, -50%);
   }
   .iframe {
     height: 50%;
