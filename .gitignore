@@ -1,17 +1,13 @@
 .env
 
-# Operators
-src/operator/answer
-src/operator/loader
-src/operator/question
-src/operator/search
-src/operator/company
-
 # Handlers
-src/handler/algorithm
-src/handler/document
-src/handler/prompt
-src/handler/parse
+src/handler/data_structures/
+src/handler/document/
+
+# Operators
+src/operator/loader/
+src/operator/search/
+src/operator/company/
 
 # Pycaches
 __pycache__/
