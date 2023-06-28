@@ -17,7 +17,7 @@ import requests
 
 
 def api_request(userId, operation, requestData):
-
+    # Specify an endpoint in main
     endpoint = "http://10.0.0.179:8000/api/"
 
     req_params = {
@@ -31,13 +31,6 @@ def api_request(userId, operation, requestData):
     return response.text
 
 
-requestData = {
-    "prolfile_url": "https://www.linkedin.com/company/ramp/people/"
-}
-
-insights = api_request("testId", "get_company_insights", requestData)
-
-print(insights)
 ```
 
 #### My ToDos:  

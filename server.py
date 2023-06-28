@@ -30,7 +30,6 @@ operationFunctionsMap = {
 def operationFunctionHandler(requestorId, operation, requestData):
     print("requestorId:", requestorId)
     print("operation:", operation)
-    print("requestData:", requestData)
     return operationFunctionsMap[operation](requestorId, requestData)
 
 
@@ -41,7 +40,7 @@ def api():
         userId = request.args.get("id")
         operation = request.args.get("operation")
         requestData = json.loads(request.args.get("requestData"))
-        print("GET", userId, operation, requestData)
+        print("GET", userId, operation)
         appResponse = operationFunctionHandler(userId, operation, requestData)
         return json.dumps(appResponse)
     elif request.method == "POST":
@@ -49,7 +48,7 @@ def api():
         userId = data.get("id", "")
         operation = data.get("operation", "")
         requestData = data.get("requestData", "")
-        print("POST", userId, operation, requestData)
+        print("POST", userId, operation)
         return operationFunctionHandler(userId, operation, requestData)
     
     return "None"
@@ -62,7 +61,7 @@ def index():
     return render_template("index.html")
 
 def run_app():
-    path = "/".join(os.getcwd().split("\\")[:-1])
+    path = "/".join(os.getcwd().split("\\"))
     os.chdir(path)
     app.run(host="10.0.0.179", port=8000)
 

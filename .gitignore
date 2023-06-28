@@ -13,8 +13,6 @@ src/handler/document
 src/handler/prompt
 src/handler/parse
 
-chrome-extension/
-
 # Pycaches
 __pycache__/
 */__pycache__/
