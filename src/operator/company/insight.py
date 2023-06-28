@@ -70,7 +70,7 @@ class Searcher(object):
 
 
 def load_company_insights(id, profile_url):
-    searcher = Searcher("bilan604@yahoo.com", "6047822691aA##", "LinkedIn")
+    searcher = Searcher("", "", "LinkedIn")
     searcher.get_insights(profile_url)
 
     return "Placeholder"

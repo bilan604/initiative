@@ -5,7 +5,6 @@ src/handler/data_structures/
 src/handler/document/
 
 # Operators
-src/operator/loader/
 src/operator/search/
 src/operator/company/
 
