@@ -1,4 +1,4 @@
-src/authentication
+src/authentication.py
 
 # Operators
 src/operator/company/**
