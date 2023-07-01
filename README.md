@@ -1,6 +1,6 @@
 # Initiative Endpoint  
 
-This repository is the remote head for aggregating code into one place. If you are git cloning this, you will have to replace the files with placeholders. Most of the code will be added to the .gitignore, because it may or may not have been written for projects not pertaining to this endpoint itself.  
+This repository is the remote head for aggregating code into one place. If you are git cloning this, you will have to replace the placeholders. I can not add all of the code to a public repo.  
 
 However, if git cloning, you will just need to replace the handler file with placeholder functions. This repository can be used as a template for your own endpoint.  
 
