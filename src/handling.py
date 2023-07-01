@@ -1,13 +1,15 @@
 import json
 import openai
 import requests
+
+# If you are git cloning this, you need to replace the following imports with placeholders
 # Searches for information
 from src.operator.search.searching import get_search_result_links
 # Answers the questions
 from src.operator.answer.answering import answer_input_questions
 # Targets the questions
 from src.operator.question.targeting import question_answer_fast
-# Get it? Advances the question to a third party.
+# Uses AI to parse questions
 from src.operator.question.advancing import question_answer_prompts, question_answer_prompting
 
 # Gets question answers
@@ -59,9 +61,3 @@ def get_search_result_urls(id, data):
     query = data.get("query", "")
     result_urls = get_search_result_links(query)
     return json.dumps(result_urls)
-
-def get_company_insights(id, data):
-    print("get_company_insights", data, type(data))
-    company_profile_url = data.get("profile_url", "")
-    insights = load_company_insights(id, company_profile_url)
-    return json.dumps(insights)
