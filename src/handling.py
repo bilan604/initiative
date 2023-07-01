@@ -9,8 +9,6 @@ from src.operator.answer.answering import answer_input_questions
 from src.operator.question.targeting import question_answer_fast
 # Get it? Advances the question to a third party.
 from src.operator.question.advancing import question_answer_prompts, question_answer_prompting
-# 
-from src.operator.company.insight import load_company_insights
 
 # Gets question answers
 def do_question_answer_fast(id, data):

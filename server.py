@@ -23,7 +23,6 @@ operationFunctionsMap = {
     # Utility function
     "get_search_result_links": get_search_result_urls,
 
-    "get_company_insights": get_company_insights
 }
 
 
