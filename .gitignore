@@ -1,13 +1,10 @@
-src/authentication.py
+src/authentication
 
-src/operator/answer/*
-src/operator/company
 src/operator/company/
-src/operator/company/*
-src/operator/loader/*
+
 
 # Operators
-*/src/operator/company/
+
 
 # Pycaches
 __pycache__/

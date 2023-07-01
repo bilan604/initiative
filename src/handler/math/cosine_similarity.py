@@ -1,9 +1,14 @@
 from math import sqrt
 from collections import Counter
 
+# sometimes I wonder how this wasn't implemented until 2018
 
-# This is a constant time cosine similarity score algorithm
-# I believe this is the same optimization method Google Search uses
+# Google these days uses (on paper)
+# Map {word: [idx of sentences that contains the word]}
+
+# which is the same thing as this
+# but I wrote a constant time algorithm that applies this concept in constant time
+# to all the pages, making a constant time search algorithm
 
 
 # On init
@@ -78,50 +83,3 @@ def cosineSimilarityDoubleCheck(words1, words2):
     for word in words2:
         vec2[vectorizer[word]] += 1
     return sum([a*b for a,b in zip(vec1, vec2)]) / (sqrt(sum([val**2 for val in vec1])) * sqrt(sum(val**2 for val in vec2)))
-
-
-"""
-# Benchmark
-
-
-import re
-
-import requests
-from bs4 import BeautifulSoup
-
-pages = []
-links = ["https://developers.google.com/machine-learning/clustering/similarity/measuring-similarity", "https://cloud.google.com/blog/topics/developers-practitioners/find-anything-blazingly-fast-googles-vector-search-technology"]
-
-for link in links:
-    s = requests.get(link).text
-    soup = BeautifulSoup(s)
-    p_tags = soup.find_all("p")
-    pageToAdd = [re.sub("[\<.*\>|\n]", "", p.text.lower()) for p in p_tags]
-    pageToAdd = [re.sub("[^a-z| ]", "", p) for p in pageToAdd if len(p) > 15]
-    pages += [" ".join(pageToAdd)]
-
-indexes = getMap(pages)
-pageSizes = getSizeOfPage(pages)
-print(pageSizes)
-
-from timeit import default_timer
-pageCounts = getPageCounts(pages)
-for query in ['dot product for vectors', "traditional search versus vector search"]:
-    print("New query:", query)
-    searchResults = getRelevantPages(indexes, query)
-    pageScores = scoreSearchResults(searchResults, query, pageCounts, pageSizes)
-    print(f"The cosine similarity scores calculated between the query and each page are:\n{pageScores}")
-    for i, pageIdx in enumerate(list(searchResults.keys())):
-        start = default_timer()
-        val1 = cosineSimilarity(query, pages[pageIdx])
-        end = default_timer()
-        print("My calculation took:", (end-start)*1000, "seconds")
-        start = default_timer()
-        val2 = cosineSimilarityDoubleCheck(query, pages[pageIdx])
-        end = default_timer()
-        print("Default calculation took:", (end-start)*1000, "seconds")
-        
-        print("\nThe cosine similarity score I calculated:", cosineSimilarity(query, pages[pageIdx]))
-        print("The cosine similarity score by traditional calculation:", cosineSimilarityDoubleCheck(query.lower().split(), pages[pageIdx].lower().split()))
-    print("-------------------------------\n")
-"""
