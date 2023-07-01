@@ -7,7 +7,7 @@ src/operator/company/*
 src/operator/loader/*
 
 # Operators
-src/operator/company/**
+*/src/operator/company/
 
 # Pycaches
 __pycache__/
