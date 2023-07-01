@@ -1,5 +1,11 @@
 src/authentication.py
 
+src/operator/answer/*
+src/operator/company
+src/operator/company/
+src/operator/company/*
+src/operator/loader/*
+
 # Operators
 src/operator/company/**
 
