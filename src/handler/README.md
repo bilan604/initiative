@@ -2,9 +2,7 @@
 
 
 ```
-algorithm
+data_structures
 document
-parse
-prompt
 ```
 

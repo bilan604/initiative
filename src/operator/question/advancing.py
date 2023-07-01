@@ -31,6 +31,14 @@ def parseLstOfJsonStrs(s):
     return jsons
 
 
+def get_validated_list(list_of_question_answers):
+    validated_list = []
+    for question_answer in list_of_question_answers:
+        dd = {re.sub("[^a-zA-Z]", "", key): question_answer[key] for key in question_answer}
+        validated_list.append(dd)
+    return validated_list
+
+
 def question_answer_prompts(id, src, threshold=100):
     """
     Generates prompts for extracting HTML content
@@ -82,7 +90,7 @@ def question_answer_prompts(id, src, threshold=100):
     return prompts
 
 
-def contentualize(responses, context_target="question"):
+def contextualize(responses, context_target="question"):
     counts = {}
     for resp_obj in responses:
         for qa in resp_obj:
@@ -116,6 +124,7 @@ def contentualize(responses, context_target="question"):
                 ans += unique
     return ans
 
+
 def question_answer_prompting(identifier, prompts):
     # identifier is openai key for now
     if not identifier:
@@ -135,12 +144,14 @@ def question_answer_prompting(identifier, prompts):
             continue
         responses.append(response_object)
     
-        print(responses)
-        print("responses:------------\n\n")
+    # responses is a nested list of lists of dictionaries
+    # parsed from gpt-4's responses to the prompts
+    formatted_responses = []
+    for list_of_question_answers in responses:
+        formatted_responses.append(get_validated_list(list_of_question_answers))
     
-    responses = contentualize(responses, "question")
-    print(responses)
-    print("responses:------------\n\n")
+    responses = contextualize(formatted_responses, "question")
+
     return responses
 
 

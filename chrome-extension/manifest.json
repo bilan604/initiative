@@ -1,0 +1,33 @@
+{
+    "manifest_version":
+        2,
+    "name":
+        "Autofill API",
+    "description":
+        "This chrome extension autofills webpage questions with previously saved answers",
+    "version":
+        "1.0",
+    "permissions": [
+        "tabs",
+        "storage",
+        "activeTab",
+        "contextMenus",
+        "http://10.0.0.179:8000/",
+        "<all_urls>"
+    ],
+    "background": {
+        "scripts":
+            ["background.js"]
+    },
+    "content_scripts": [
+        {
+        "matches":
+            [
+                "http://10.0.0.179:8000/",
+                "<all_urls>"
+            ],
+        "js":
+            ["content.js"]
+        }
+    ]
+}

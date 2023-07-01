@@ -1,12 +1,9 @@
+# There is no .env file required but I'll leave this here for if I add one
 .env
 
 # Handlers
-src/handler/data_structures/
-src/handler/document/
 
 # Operators
-src/operator/search/
-src/operator/company/
 
 # Pycaches
 __pycache__/
