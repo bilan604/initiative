@@ -1,15 +1,11 @@
 from math import sqrt
 from collections import Counter
 
-# sometimes I wonder how this wasn't implemented until 2018
 
 # Google these days uses (on paper)
 # Map {word: [idx of sentences that contains the word]}
 
-# which is the same thing as this
-# but I wrote a constant time algorithm that applies this concept in constant time
-# to all the pages, making a constant time search algorithm
-
+# which I includes this (on paper)
 
 # On init
 def getMap(pages):
@@ -83,3 +79,4 @@ def cosineSimilarityDoubleCheck(words1, words2):
     for word in words2:
         vec2[vectorizer[word]] += 1
     return sum([a*b for a,b in zip(vec1, vec2)]) / (sqrt(sum([val**2 for val in vec1])) * sqrt(sum(val**2 for val in vec2)))
+
