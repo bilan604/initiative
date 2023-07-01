@@ -1,9 +1,4 @@
-src/operator/company
-
-# Operators
-
-
-# Pycaches
+src/operator/company/*
 __pycache__/
 */__pycache__/
 /__pycache__/*
