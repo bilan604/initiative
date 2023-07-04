@@ -17,7 +17,7 @@ However, if git cloning, you will just need to replace the handler file with pla
 
 #### Ping:  
 Check the landing page is up:
-Visit http://10.0.0.179:8000
+Visit http://10.0.0.179:8000 (localhost)  
 
 #### Use the API endpoint:  
 ```
