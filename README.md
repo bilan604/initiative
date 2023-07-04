@@ -4,6 +4,8 @@ This repository is the remote head for aggregating code into one place. If you a
 
 However, if git cloning, you will just need to replace the handler file with placeholder functions. This repository can be used as a template for your own endpoint.  
 
+Special thanks to OpenAI for the CSS and HTML template, which a added to a slider component to the frontend placeholder.
+
 ## 1. Autofill Chrome Extension:  
 1. Git clone this repository.  
 2. Install the dependencies.  
