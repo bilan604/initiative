@@ -34,7 +34,7 @@ def parseLstOfJsonStrs(s):
 def get_validated_list(list_of_question_answers):
     validated_list = []
     for question_answer in list_of_question_answers:
-        dd = {re.sub("[^a-zA-Z]", "", key): question_answer[key] for key in question_answer}
+        dd = {re.sub("[^a-zA-Z|_]", "", key): question_answer[key] for key in question_answer}
         validated_list.append(dd)
     return validated_list
 

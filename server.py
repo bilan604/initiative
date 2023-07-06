@@ -20,8 +20,11 @@ operationFunctionsMap = {
 
     "question_answer_fast": do_question_answer_fast, 
     "answer_input_questions": do_answer_input_questions,
+    
     # Utility function
     "get_search_result_links": get_search_result_urls,
+
+    #"get_engineering_growth_insights": get_engineering_growth_insights
 
 }
 

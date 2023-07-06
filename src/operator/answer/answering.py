@@ -25,8 +25,26 @@ def load_question_data_plc(userId):
 
 
 def answer_input_questions(id, inputQuestions):
+    
+    
     ##########
     # placeholder implementation
+    def check_keynames(input_question):
+        if len(input_question) == 3:
+            if "question" in input_question and "question_identifier" in input_question and "answer_identifier" in input_question:
+                return True
+        return False
+
+    # filter by checking the names of the keys are correct
+    inputQuestions = [input_question for input_question in inputQuestions if check_keynames(input_question)]
+
+    # replace the following implementation with whichever service/backend this needs to be connnected to:
+
+
+
+
+
+
     questionData = load_question_data_plc(id)
     print("questionData", questionData)
     if not questionData:

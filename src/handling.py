@@ -12,6 +12,8 @@ from src.operator.question.targeting import question_answer_fast
 # Uses AI to parse questions
 from src.operator.question.advancing import question_answer_prompts, question_answer_prompting
 
+#from src.operator.company.insight import Searcher
+
 # Gets question answers
 def do_question_answer_fast(id, data):
     html_content = data["html_content"]
@@ -61,3 +63,15 @@ def get_search_result_urls(id, data):
     query = data.get("query", "")
     result_urls = get_search_result_links(query)
     return json.dumps(result_urls)
+
+def get_engineering_growth_insights(id, data):
+    username = data.get("username", "")
+    password = data.get("password", "")
+    company_url = data.get("company_url", "")
+    
+    #searcher = Searcher(username, password)
+    #company = searcher.get_company_information(company_url).to_dict()
+    
+    # A placeholder
+    company = {}
+    return json.dumps(company)
