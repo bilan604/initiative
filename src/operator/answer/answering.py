@@ -38,63 +38,24 @@ def answer_input_questions(id, inputQuestions):
     # filter by checking the names of the keys are correct
     inputQuestions = [input_question for input_question in inputQuestions if check_keynames(input_question)]
 
-    # replace the following implementation with whichever service/backend this needs to be connnected to:
+    # @alex replace the following implementation with the component you need to connect this to
 
-
-
-
-
-
-    questionData = load_question_data_plc(id)
-    print("questionData", questionData)
-    if not questionData:
-        return "No information found for id " + id
-
-    def getAnsweredQuestions(questionData):
-        # points to the input question to retrieve it
-        pointer = {}
-        for answer, question_synonyms in questionData.items():
-            for question in question_synonyms:
-                # parse the spacing for pointers to the answer, i.e. "full name"
-                question = parseAnswerTextSpacing(question)
-                pointer[question] = answer
-        return pointer
-
-    # Helper func to make retriever
-    answeredQuestions = getAnsweredQuestions(questionData)
-    matchedQuestions = []
-    for inputQuestion in inputQuestions:
-        # ToDo: add webpag support for questions formatted as synonym1/synonym2
-        pageQuestion = inputQuestion["question"]
-        pageQuestion = parseAnswerTextSpacing(pageQuestion)
-        if pageQuestion in answeredQuestions:
-            matchedQA = inputQuestion.copy()
-            matchedQA["answer"] = answeredQuestions[pageQuestion]
-            matchedQuestions.append(matchedQA)
-        else:
-            relevantQuestion = checkAnsweredQuestions(pageQuestion, answeredQuestions)
-            if not relevantQuestion: continue
-            matchedQA = inputQuestion.copy()
-            matchedQA["answer"] = answeredQuestions[relevantQuestion]
-            matchedQuestions.append(matchedQA)
-
-    # filter out answer_identifiers with multiple appearances
-    memo = {}
-    for mq in matchedQuestions:
-        if mq["answer_identifier"] not in memo:
-            memo[mq["answer_identifier"]] = 1
-        else:
-            memo[mq["answer_identifier"]] += 1
-
-    matchedQuestions = [mq for mq in matchedQuestions if memo[mq["answer_identifier"]] == 1]
-
-    # filter out question_identifiers with multiple appearances
-    memo = {}
-    for mq in matchedQuestions:
-        if mq["question_identifier"] not in memo:
-            memo[mq["question_identifier"]] = 1
-        else:
-            memo[mq["question_identifier"]] += 1
-    matchedQuestions = [mq for mq in matchedQuestions if memo[mq["question_identifier"]] == 1]
-    return matchedQuestions
-
+    def get_sample_data(inputQuestions):
+        sample_data = {}
+        for input_question in inputQuestions:
+            sample_data[input_question["question"].lower()] = "answer for " + input_question["question"].lower()
+        return sample_data
+    
+    # This is just a hashmap
+    sample_data_for_id = get_sample_data(inputQuestions)
+    
+    # replace this hashmap direct match with the appropriate implementation
+    answered_questions = []
+    for question in inputQuestions:
+        hashmap_key = question["question"].lower()
+        if hashmap_key in sample_data_for_id:
+            sample_data_for_id[hashmap_key]
+            answered_question = question.copy()
+            answered_question["answer"] = sample_data_for_id[hashmap_key]
+            answered_questions.append(answered_question)
+    return answered_questions
