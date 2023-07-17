@@ -30,6 +30,12 @@ request_data = {
     "query": "How many years of Python programming experience do you have?"
 }
 response = api_request("bilan604", "search_datatable", request_data)
+
+print(response)
+
+"""
+4
+"""
 ```
 
 Or:
@@ -40,4 +46,13 @@ request_data = {
 }
 
 response = api_request("bilan604", "get_extracted_questions", request_data)
+
+for r in response:
+    print("Question:", r["question"])
+
+"""
+Question: Mobile phone number
+Question: Email address
+Question: Phone country code
+"""
 ```
