@@ -33,5 +33,3 @@ def test_url(api_key):
     print(response.text)
     print("test2: len(response.text)", len(response.text))
     
-
-test_url()

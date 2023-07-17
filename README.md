@@ -21,23 +21,18 @@ Visit http://10.0.0.179:8000
 
 #### Use the API endpoint:  
 ```
-import json
-import requests
-
-
-def api_request(userId, operation, requestData):
+def api_request(userId, operation, request_data):
     # Specify an endpoint in main
     endpoint = "http://10.0.0.179:8000/api/"
 
     req_params = {
-        "userId": userId,
+        "id": userId,
         "operation": operation,
-        "requestData": json.dumps(requestData)
+        "request_data": json.dumps(request_data)
     }
 
     response = requests.get(endpoint, params=req_params)
+    print("\nresponse:", response)
     
-    return response.text
-
-
+    return json.loads(response.text)
 ```

@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from src.operator.loader.data_loading import load_question_data
+from src.operator.load.data_loading import load_question_data
 from src.handler.parse.parsing import parseAnswerTextSpacing
 
 

@@ -1,8 +1,25 @@
 import re
 import requests
 from bs4 import BeautifulSoup
+from collections import Counter
+from src.handler.load.loading import load_information
+from src.handler.data_structures.search import Infobit, DataTable
 
 
+def get_datatable(id, table_name):
+    datatable = DataTable(id)
+    pagesA, postsA = load_information(id, table_name)
+    datatable.load(pagesA, postsA)
+    return datatable
+
+
+def query_datatable(query, datatable):
+    infobit = datatable.query(query)  #info = INPUTS.query(answer_key)
+    answer = str(infobit.answer)
+    return answer
+
+
+# webscrapes google search, unrelated, should move
 def get_search_result_links(query):
     query = re.sub("[^a-zA-Z| ]", "", query)
     query = re.sub(" +", "+", query)
@@ -15,3 +32,6 @@ def get_search_result_links(query):
     anchor_tags = ["".join(at.split('href="/url?q=')[1:]) for at in anchor_tags]
     search_result_links = [at[:at.find('&')] for at in anchor_tags]
     return search_result_links
+
+
+
