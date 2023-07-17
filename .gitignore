@@ -1,13 +1,9 @@
-src/operator/company
+.env
 
-# Operators
-
-
-# Pycaches
 __pycache__/
 */__pycache__/
 /__pycache__/*
 */__pycache__/*
 
-
-
+src/storage/
+src/storage/*
