@@ -21,24 +21,21 @@ def get_search_result_links(id, data):
 
 
 def load_datatable(id, data):
+    global DATATABLES
     """
     Loads to RAM, is placeholder, replaceable component
     """
     print("load_data()")
-    print("data:", data)
-    print("\ntype(data):", type(data))
-
-    global DATATABLES
+    
     # add validations, etc
+    
     tablename = data
     datatable = get_datatable(id, tablename)
     DATATABLES[tablename] = datatable
 
 
 def search_datatable(id, data):
-    print("load_data()")
-    print("data:", data)
-    print("\ntype(data):", type(data))
+    print("search_datatable()")
 
     # validations, etc
     tablename = data["tablename"]
@@ -59,12 +56,9 @@ def search_datatable(id, data):
 
 
 def get_extracted_questions(id, data):
-    print("load_data()")
-    print("data:", data)
-    print("\ntype(data):", type(data))
+    print("get_extracted_questions()")
 
-    # validations, etc
-    # validations, etc
+    # validations, etc!
     # validations, etc!
 
     src = data["src"]
@@ -86,12 +80,11 @@ def get_extracted_questions(id, data):
         except:
             return "Error on exec(script)"
     
-    print("\nrule:", RULE)
+    if not RULE:
+        return "not RULE"
+    print("RULE:", RULE)
 
     questions = get_questions(src, RULE)
-    
-    print("\nquestions:", questions)
-
     return questions
             
     
