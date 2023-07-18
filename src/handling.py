@@ -1,5 +1,5 @@
-import re
 import json
+from src.handler.load.loading import check_contains
 from src.operator.search.searching import get_search_result_links
 from src.operator.search.searching import get_datatable, query_datatable
 from src.operator.question.extract import get_questions
@@ -29,9 +29,13 @@ def load_datatable(id, data):
     """
 
     # add validations, etc
-    
+    id_present = check_contains("src/storage", id)
+    if not id_present:
+        return f"No datatables for id: {id}"
+
     tablename = data
     datatable = get_datatable(id, tablename)
+    print("\ndatatable:", datatable)
     DATATABLES[tablename] = datatable
 
 
@@ -53,6 +57,7 @@ def search_datatable(id, data):
         load_datatable(id, tablename)
         
     search_result = query_datatable(query, DATATABLES[tablename])
+    print("\nsearch_result:", search_result)
     return search_result
 
 
