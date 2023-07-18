@@ -58,7 +58,8 @@ class DataTable(object):
             for idx in self.PageIndexer[comp]:
                 if idx not in scoring:
                     scoring[idx] = set({})
-                scoring[idx].add(comp)
+                for word in comp.split(" "):
+                    scoring[idx].add(word)
         return scoring
 
     def query(self, queryInput, cutt_off = 0.6):

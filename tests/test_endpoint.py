@@ -1,13 +1,14 @@
 import json
 import requests
+from tests.static_info import *
+
 
 """
 Default local test: Requires having input.csv in bilan604 folder
 """
 
-
 def api_request(userId, operation, request_data):
-    # Specify an endpoint in main
+    # Specified endpoint in main
     endpoint = "http://10.0.0.179:8000/api/"
 
     req_params = {
@@ -25,13 +26,15 @@ request_data = {
     "tablename": "input",
     "query": "How many years of Python programming experience do you have?"
 }
+
 response = api_request("bilan604", "search_datatable", request_data)
 print("\nresponse:", response)
 
 
 """
-A question extraction with lambda function:
+Test for question extraction given page source and a lambda function:
 """
+
 easy_apply_src = \
 """
 <div class="ph5">
@@ -240,6 +243,7 @@ request_data = {
     "src": easy_apply_src,
     "rule": 'lambda x: "class" in x and "jobs-easy-apply-form-section__grouping" in x["class"]'
 }
+
 response = api_request("bilan604", "get_extracted_questions", request_data)
 
 for r in response:

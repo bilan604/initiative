@@ -23,13 +23,13 @@ def get_search_result_links(id, data):
 
 
 def load_datatable(id, data):
+    global DATATABLES
     """
     Loads to RAM, is placeholder, replaceable component
     """
-    print("load_datatable()")
 
-    global DATATABLES
     # add validations, etc
+    
     tablename = data
     datatable = get_datatable(id, tablename)
     DATATABLES[tablename] = datatable
@@ -58,7 +58,6 @@ def search_datatable(id, data):
 
 def get_extracted_questions(id, data):
     print("get_extracted_questions()")
-    # Add validations!
 
     src = data["src"]
     if not src:
@@ -73,17 +72,25 @@ def get_extracted_questions(id, data):
         return "not rule_str"
     else:
         # You may want to uncomment out this code segment if not
-        # hosting for just yourself.
+        # hosting for just yourself. These are some checks for code injection.
         """
         # Escape characters allow code on different lines to be run as a single line
         rule_str = re.sub("\\", "", rule_str)
+        
         # Newline characters for detecting multiple lines of code
         rule_str = re.sub("\n", "", rule_str)
+        
         # Escape sequence via comment
         rule_str = re.sub("#", "", rule_str)
+        
+        # Global variables can be accessed by defining code to try/except brute force all possible
+        # names for global variables and then executing the code within the code execution
         rule_str = re.sub("global", "", rule_str)
         
         if original_str != rule_str:
+            return "Bad!"
+        
+        if rule_str.find("lambda") != 0:
             return "Bad!"
         """
 
@@ -93,10 +100,12 @@ def get_extracted_questions(id, data):
             exec(script)
         except:
             return "Error on exec(script)"
+    
+    if not RULE:
+        return "not RULE"
 
     questions = get_questions(src, RULE)
-    print("\nquestions:", questions)
-
+    
     return questions
             
     
