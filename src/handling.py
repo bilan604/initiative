@@ -72,12 +72,20 @@ def get_extracted_questions(id, data):
     if not rule_str:
         return "not rule_str"
     else:
+        # You may want to uncomment out this code segment if not
+        # hosting for just yourself.
+        """
+        # Escape characters allow code on different lines to be run as a single line
         rule_str = re.sub("\\", "", rule_str)
+        # Newline characters for detecting multiple lines of code
         rule_str = re.sub("\n", "", rule_str)
+        # Escape sequence via comment
         rule_str = re.sub("#", "", rule_str)
         rule_str = re.sub("global", "", rule_str)
+        
         if original_str != rule_str:
             return "Bad!"
+        """
 
         script = "global RULE\n"
         script += "RULE = " + rule_str + "\n"

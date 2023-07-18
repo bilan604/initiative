@@ -32,3 +32,27 @@ def api_request(userId, operation, request_data):
     
     return json.loads(response.text)
 ```
+
+i.e. Second example in tests/test_endpoint.py gives:
+```
+request_data = {
+    "src": easy_apply_src,
+    "rule": 'lambda x: "class" in x and "jobs-easy-apply-form-section__grouping" in x["class"]'
+}
+response = api_request("bilan604", "get_extracted_questions", request_data)
+
+
+for r in response:
+    print("Question:", r["question"])
+
+# Output:
+"""
+Question: How many years of work experience do you have with Data Pipelines?
+Question: How many years of work experience do you have with Shell Scripting?
+Question: How many years of work experience do you have with Python (Programming Language)?
+Question: Do you have a U.S. Citizenship required to qualify for a DoD interim Secret (or higher) security clearance?
+Question: Do you have at least 2+ years experience with any of the following: MATLAB, Embedded Multi-Threaded development, ARM microprocessors, or any deep learning, TensorFlow?
+Question: Are you comfortable working in a hybrid setting?
+Question: Are you comfortable commuting to this job's location?
+"""
+```
