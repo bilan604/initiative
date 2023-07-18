@@ -1,12 +1,21 @@
 # Initiative Endpoint  
 
-This repository is the remote head for aggregating code into one place. If you are git cloning this, you will have to replace the placeholders. I can not add all of the code to a public repo.  
+This is a local API endpoint that aggregates various operations and functionalities I have coded into one place. It includes functionalities such as finding questions and answering the questions with information I have stored, so that certain forms can be filled by providing a lambda function.
 
-#### Ping:  
-Check the landing page is up:
-Visit http://10.0.0.179:8000 (localhost)  
+## Running:  
+```
+python main.py
+```
 
-#### Use the API endpoint:  
+#### Pinging:  
+The landing page is set as:  
+http://10.0.0.179:8000  
+
+Visit page in browser to see if the server is up.  
+
+#### get requests to the API endpoint:  
+
+Heres a function that handles it:  
 ```
 def api_request(userId, operation, request_data):
     # Specify an endpoint in main
@@ -23,7 +32,7 @@ def api_request(userId, operation, request_data):
     return json.loads(response.text)
 ```
 
-Like:
+Like:  
 ```
 request_data = {
     "tablename": "input",
@@ -38,7 +47,7 @@ print(response)
 """
 ```
 
-Or:
+Or (from tests/test_endpoint.py):  
 ```
 request_data = {
     "src": easy_apply_src,
@@ -50,9 +59,15 @@ response = api_request("bilan604", "get_extracted_questions", request_data)
 for r in response:
     print("Question:", r["question"])
 
+# Output:
 """
-Question: Mobile phone number
-Question: Email address
-Question: Phone country code
+Question: How many years of work experience do you have with Data Pipelines?
+Question: How many years of work experience do you have with Shell Scripting?
+Question: How many years of work experience do you have with Python (Programming Language)?
+Question: Do you have a U.S. Citizenship required to qualify for a DoD interim Secret (or higher) security clearance?
+Question: Do you have at least 2+ years experience with any of the following: MATLAB, Embedded Multi-Threaded development, ARM microprocessors, or any deep learning, TensorFlow?
+Question: Are you comfortable working in a hybrid setting?
+Question: Are you comfortable commuting to this job's location?
 """
 ```
+

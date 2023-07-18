@@ -1,5 +1,5 @@
+import re
 import json
-import requests
 from src.operator.search.searching import get_search_result_links
 from src.operator.search.searching import get_datatable, query_datatable
 from src.operator.question.extract import get_questions
@@ -7,6 +7,8 @@ from src.operator.question.extract import get_questions
 """
 This file exists as a wrapper for the functionalities that are accessed,
 because inputs have to be verified and stuff, etc
+
+Perhaps it could serve as proxy for a the information in a system design interview?
 """
 
 
@@ -25,8 +27,7 @@ def load_datatable(id, data):
     """
     Loads to RAM, is placeholder, replaceable component
     """
-    print("load_data()")
-    
+
     # add validations, etc
     
     tablename = data
@@ -58,23 +59,43 @@ def search_datatable(id, data):
 def get_extracted_questions(id, data):
     print("get_extracted_questions()")
 
-    # validations, etc!
-    # validations, etc!
-
     src = data["src"]
     if not src:
         return "not src"
     
     rule_str = data["rule"]
-    
+    original_str = rule_str
+
     global RULE
     RULE = None
     if not rule_str:
         return "not rule_str"
     else:
+        # You may want to uncomment out this code segment if not
+        # hosting for just yourself. These are some checks for code injection.
+        """
+        # Escape characters allow code on different lines to be run as a single line
+        rule_str = re.sub("\\", "", rule_str)
+        
+        # Newline characters for detecting multiple lines of code
+        rule_str = re.sub("\n", "", rule_str)
+        
+        # Escape sequence via comment
+        rule_str = re.sub("#", "", rule_str)
+        
+        # Global variables can be accessed by defining code to try/except brute force all possible
+        # names for global variables and then executing the code within the code execution
+        rule_str = re.sub("global", "", rule_str)
+        
+        if original_str != rule_str:
+            return "Bad!"
+        
+        if rule_str.find("lambda") != 0:
+            return "Bad!"
+        """
+
         script = "global RULE\n"
         script += "RULE = " + rule_str + "\n"
-        print("\nscript:", script)        
         try:
             exec(script)
         except:
@@ -82,9 +103,9 @@ def get_extracted_questions(id, data):
     
     if not RULE:
         return "not RULE"
-    print("RULE:", RULE)
 
     questions = get_questions(src, RULE)
+    
     return questions
             
     
