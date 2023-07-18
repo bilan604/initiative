@@ -13,7 +13,7 @@ http://10.0.0.179:8000
 
 Visit page in browser to see if the server is up.  
 
-#### get requests to the API endpoint:  
+#### Get requests to the API endpoint:  
 
 Heres a function that handles it:  
 ```
