@@ -1,19 +1,14 @@
 .env
 
-# Operators
-src/operator/answer
-src/operator/loader
-src/operator/question
-src/operator/search
-src/operator/company
-
 # Handlers
-src/handler/algorithm
-src/handler/document
-src/handler/prompt
-src/handler/parse
+src/handler/document/
+src/handler/data_structures/
+src/handler/prompt/
+src/handler/parse/
 
-chrome-extension
+# Operators
+src/operator/answer/
+src/operator/search/
 
 # Pycaches
 __pycache__/
@@ -22,4 +17,3 @@ __pycache__/
 */__pycache__/*
 
 src/storage/bilan604/
-
