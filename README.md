@@ -1,14 +1,21 @@
 # Initiative Endpoint  
 
-This repository is the remote head for aggregating code into one place. If you are git cloning this, you will have to replace the files with placeholders. Most of the code will be added to the .gitignore, because it may or may not have been written for projects not pertaining to this endpoint itself.  
+This is a local API endpoint that aggregates various operations and functionalities I have coded into one place. It includes functionalities such as finding questions and answering the questions with information I have stored, so that certain forms can be filled by providing a lambda function.
 
-However, if git cloning, you will just need to replace the handler file with placeholder functions. This repository can be used as a template for your own endpoint.  
+## Running:  
+```
+python main.py
+```
 
-#### Ping:  
-Check the landing page is up:
-Visit http://10.0.0.179:8000
+#### Pinging:  
+The landing page is set as:  
+http://10.0.0.179:8000  
 
-#### Use the API endpoint:  
+Visit page in browser to see if the server is up.  
+
+#### get requests to the API endpoint:  
+
+Heres a function that handles it:  
 ```
 def api_request(userId, operation, request_data):
     # Specify an endpoint in main
