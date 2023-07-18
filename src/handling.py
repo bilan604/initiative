@@ -1,69 +1,111 @@
+import re
 import json
-import openai
-import requests
-# Searches for information
 from src.operator.search.searching import get_search_result_links
-# Answers the questions
-from src.operator.answer.answering import answer_input_questions
-# Targets the questions
-from src.operator.question.targeting import question_answer_fast
-# Get it? Advances the question to a third party.
-from src.operator.question.advancing import question_answer_prompts, question_answer_prompting
-# 
-from src.operator.company.insight import load_company_insights
+from src.operator.search.searching import get_datatable, query_datatable
+from src.operator.question.extract import get_questions
 
-# Gets question answers
-def do_question_answer_fast(id, data):
-    html_content = data["html_content"]
-    qas = question_answer_fast(id, html_content)
-    return json.dumps(qas)
+"""
+This file exists as a wrapper for the functionalities that are accessed,
+because inputs have to be verified and stuff, etc
 
-# Gets prompts to get question answers
-def get_question_answer_prompts(id, data):
-    print(f"UserId {id} request at get_question_answer_prompts()")
-    html_content = data["html_content"]
-    prompts = question_answer_prompts(id, html_content)
-    return json.dumps(prompts)
+Perhaps it could serve as proxy for a the information in a system design interview?
+"""
 
-# Gets question answers from prompts
-def get_question_answer_prompt_responses(id, data):
-    print(f"UserId {id} request at get_question_answer_prompt_responses()")
-    prompts = data["prompts"]
-    api_key = data["api_key"]
-    responses = question_answer_prompting(api_key, prompts)
-    return json.dumps(responses)
 
-# Gets answered question answers
-def do_answer_input_questions(id, data):
-    qas = data["qas"]
-    answers = answer_input_questions(id, qas)
-    return json.dumps(answers)
+RULE = ""
+DATATABLES = {}
 
-# Combines 
-def get_questions_from_url_with_llm(id, data):
-    print(f"UserId {id} request at get_questions_from_url_with_llm()")
 
-    openai_api_key = data.get("api_key", "")
-    html_content = ""
-    if "html_content" in data:
-        html_content = data["html_content"]
-    elif "url" in data:
-        html_content = requests.get(data["url"]).text
-    
-    # Gets responses
-    prompts = question_answer_prompts(id, html_content)
-    qas = question_answer_prompting(openai_api_key, prompts)
-    # These are handled, parsed responses
-    answers = answer_input_questions(id, qas)
-    return json.dumps(answers)
-
-def get_search_result_urls(id, data):
+def get_search_result_links(id, data):
     query = data.get("query", "")
     result_urls = get_search_result_links(query)
     return json.dumps(result_urls)
 
-def get_company_insights(id, data):
-    print("get_company_insights", data, type(data))
-    company_profile_url = data.get("profile_url", "")
-    insights = load_company_insights(id, company_profile_url)
-    return json.dumps(insights)
+
+def load_datatable(id, data):
+    global DATATABLES
+    """
+    Loads to RAM, is placeholder, replaceable component
+    """
+
+    # add validations, etc
+    
+    tablename = data
+    datatable = get_datatable(id, tablename)
+    DATATABLES[tablename] = datatable
+
+
+def search_datatable(id, data):
+    print("search_datatable()")
+
+    # validations, etc
+    tablename = data["tablename"]
+    if not tablename:
+        return "not tablename"
+    
+    query = data["query"]
+    if not query:
+        return "not query"
+    
+    if tablename not in DATATABLES:
+        print("tablename not in DATATABLES")
+        print("AUTOMATICALLY LOADING DATATABLE")
+        load_datatable(id, tablename)
+        
+    search_result = query_datatable(query, DATATABLES[tablename])
+    return search_result
+
+
+def get_extracted_questions(id, data):
+    print("get_extracted_questions()")
+
+    src = data["src"]
+    if not src:
+        return "not src"
+    
+    rule_str = data["rule"]
+    original_str = rule_str
+
+    global RULE
+    RULE = None
+    if not rule_str:
+        return "not rule_str"
+    else:
+        # You may want to uncomment out this code segment if not
+        # hosting for just yourself. These are some checks for code injection.
+        """
+        # Escape characters allow code on different lines to be run as a single line
+        rule_str = re.sub("\\", "", rule_str)
+        
+        # Newline characters for detecting multiple lines of code
+        rule_str = re.sub("\n", "", rule_str)
+        
+        # Escape sequence via comment
+        rule_str = re.sub("#", "", rule_str)
+        
+        # Global variables can be accessed by defining code to try/except brute force all possible
+        # names for global variables and then executing the code within the code execution
+        rule_str = re.sub("global", "", rule_str)
+        
+        if original_str != rule_str:
+            return "Bad!"
+        
+        if rule_str.find("lambda") != 0:
+            return "Bad!"
+        """
+
+        script = "global RULE\n"
+        script += "RULE = " + rule_str + "\n"
+        try:
+            exec(script)
+        except:
+            return "Error on exec(script)"
+    
+    if not RULE:
+        return "not RULE"
+
+    questions = get_questions(src, RULE)
+    
+    return questions
+            
+    
