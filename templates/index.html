@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>Initiative API Landing Page</title>
+  <title>Bill's Flask Server</title>
   <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet"  />
   <script src="static/script.js"></script>
 
@@ -31,18 +31,24 @@
     <div id="gallery" onmouseenter ="onMouseEnter(event)" onmouseout="onMouseOut(event)">
         
         <div>
-            <img class="gallery_image" src="static/itr604.png" alt="TensorFlow Image Project">
+            <img class="gallery_image" src="static/mlb_dominance_hier.png" alt="" href="">
+            <a href="https://github.com/bilan604/MLB-Dominance-Heirarchy/blob/main/RankingTheMLB.pdf">MLB Dominance Hierarchy</a>
         </div>
         <div>
-            <img class="gallery_image" src="static/SeaTurtlePNG.png" alt="DiscordGPyT Project">
+            <img class="gallery_image" src="static/SeaTurtlePNG.png" alt="DiscordGPyT" href="">
+            <a href="https://github.com/bilan604/discordGPyT">Discord Bot</a>
         </div>
         <div>
-            <img class="gallery_image" src="static/mlb_dominance_hier.png" alt="DiscordGPyT Project">
+            
+            <img class="gallery_image" src="static/phi_and_e.png" alt="">
+            <a href="https://github.com/bilan604/GooglePagerank/blob/main/Page_Rank.pdf">PageRank Project</a>
         </div>
+        
         <div>
-            <img class="gallery_image" src="static/phi_and_e.png" alt="DiscordGPyT Project">
+            <img class="gallery_image" src="static/itr604.png" alt="TensorFlow Image">
+            <a href="https://github.com/bilan604/GooglePagerank/blob/main/Page_Rank.pdf">TensforFlow Project</a>
         </div>
-        <div>
+        <div class="gallery_video_container">
             <iframe
                 src="static/sta160.mp4"
                 class="gallery_video"
@@ -50,19 +56,6 @@
                 >
             </iframe>
         </div>
-        
-
-
-
-        <div id="result_1">      
-            <h3>Ask Questions</h3>
-            <form action="/" method="post">
-                <input type="text" name="query" placeholder="Enter a Question" autocomplete="off" required />
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
-
-
 
     </div>
 

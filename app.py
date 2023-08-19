@@ -30,9 +30,11 @@ def operationFunctionHandler(requestorId, operation, requestData):
 def api():
     print("==> api() function called")
     userId = request.args.get("id")
+    print("userId:", userId)
     operation = request.args.get("operation")
+    print("operation:", operation)
     request_data = json.loads(request.args.get("request_data"))
-
+    print("request_data:", request_data)
     if request.method == "GET":
         print("GET", userId, operation)
         api_response = operationFunctionHandler(userId, operation, request_data)

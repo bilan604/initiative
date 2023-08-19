@@ -97,7 +97,9 @@
     width: 50vmin;
     object-fit: cover;
     object-position: 100% 0%;
-    pointer-events: none;
+  }
+  .gallery_video_container {
+    user-select: none;
   }
   #gallery {
     display: flex;
@@ -109,6 +111,9 @@
     border-radius: 25px;
     background-color: black;
     transform: translate(0%, -50%);
+  }
+  #gallery_image_link {
+    text-align: center;
   }
   .iframe {
     height: 50%;

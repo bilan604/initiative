@@ -47,7 +47,7 @@ function onMouseMove(e) {
     let gallery = document.getElementById("gallery");
     if (gallery.mouseInside) {
         
-        if (Date.now() - gallery.startTime < 100) {
+        if (Date.now() - gallery.startTime < 10) {
             //console.log("too soon time");
             return;
         }
@@ -60,8 +60,8 @@ function onMouseMove(e) {
         gallery.prevX = u;
         gallery.startTime = Date.now();
         gallery.animate(
-            {transform: 'translate(-' + Math.min(100, Math.max(0, newRatio)) +'%, -44%)'}, 
-            {duration: 100, fill: 'forwards'}
+            {transform: 'translate(-' + Math.min(100, Math.max(0, newRatio)) +'%, -50%)'}, 
+            {duration: 10, fill: 'forwards'}
         );
         moveImages(e);
         
@@ -107,3 +107,7 @@ function onMouseOut(e) {
     
     
 }
+
+
+
+
