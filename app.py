@@ -4,8 +4,8 @@ from flask import Flask, request, redirect, render_template, url_for
 from src.handling import get_search_result_links
 from src.handling import search_datatable
 from src.handling import get_extracted_questions
-from dotenv import load_dotenv
-load_dotenv()
+#from dotenv import load_dotenv
+#load_dotenv()
 
 # count is unused
 count = 0
@@ -56,8 +56,5 @@ def index():
 def run_app():
     path = "/".join(os.getcwd().split("\\"))
     os.chdir(path)
-    try:
-       app.run(host="10.0.0.179", port=8000)
-    except:
-        app.run()
+    app.run()
 
