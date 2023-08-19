@@ -2,16 +2,20 @@
 
 This is a local API endpoint that aggregates various operations and functionalities I have coded into one place. It includes functionalities such as finding questions and answering the questions with information I have stored, so that certain forms can be filled by providing a lambda function.
 
-## Running:  
+## Running:
+1. git clone this repo
+2. install dependencies with pip or however you prefer. I use ```pip install [package_name]```
+3. run main.py based on how you installed the dependencies. I run 
 ```
 python main.py
 ```
+in git bash
 
 #### Pinging:  
 The landing page is set as:  
 http://10.0.0.179:8000  
 
-Visit page in browser to see if the server is up.  
+Its a placeholder. Yo0u can use it to see if the endpoint is up.
 
 #### Get requests to the API endpoint:  
 

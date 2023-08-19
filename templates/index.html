@@ -2,77 +2,25 @@
 <head>
   <title>Initiative API Landing Page</title>
   <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet"  />
-  <script>
-
-    function onMouseUp(e) {
-        let gallery = document.getElementById("gallery");
-        gallery.mousedown = 'false';
-        posdiff = 100 * (e.clientX - gallery.startClick) / window.innerWidth;
-        
-        gallery.oldpos = posdiff + gallery.oldpos;
-        gallery.animate(
-            {transform: 'translate(-' + Math.min(100, Math.max(0, gallery.oldpos)) +'%, -44%)'}, 
-            {duration: 800, fill: 'forwards'}
-        );
-    }
-    
-    function onMouseDown(e) {
-        let gallery = document.getElementById("gallery");
-        if (isNaN(gallery.oldpos)) {
-            gallery.oldpos = 0;
-        }
-        gallery.startClick = e.clientX;
-        gallery.mousedown = 'true';
-    }
-        
-    function onMouseMove(e) {
-        const gallery = document.getElementById("gallery");
-        
-        if (gallery.mousedown == "true") {
-            const dwindowratio = (e.clientX - gallery.startClick) / window.innerWidth;
-            const newratio = 100 * dwindowratio;
-            const newpos = newratio + gallery.oldpos;
-            gallery.animate(
-                {transform: 'translate(-' + Math.min(100, Math.max(0, newpos)) +'%, -60%)'}, 
-                {duration: 1200, fill: 'forwards'}
-            );
-
-            const np = Math.min(100, Math.max(0, (100-(1.5*newpos.toFixed(0)))));
-            const images = gallery.getElementsByClassName("gallery_image");
-            for (let i = 0; i < images.length; i++) {
-                images[i].animate(
-                {objectPosition: np + '% 50%'},
-                {duration: 1200, fill: 'forwards'}
-                );
-            }
-        }
-    }
-    
-    function onMouseEnter(e) {
-        /*var element = document.getElementById("test-display");*/
-    }
-    
-    function onMouseOut(e) {
-        /*var element = document.getElementById("test-display");*/
-    }
-    
-</script>
+  <script src="static/script.js"></script>
 
 </head>
 
-<body onmousedown="onMouseDown(event)" onmouseup="onMouseUp(event)" onmousedown="onMouseDown(event)" onmousemove="onMouseMove(event)" onmouseout="onMouseOut(event)" onmouseenter ="onMouseEnter(event)">
+<body id="body" onmousedown="onMouseDown(event)" onmouseup="onMouseUp(event)" onmousedown="onMouseDown(event)" onmousemove="onMouseMove(event)" >
 
     <div id="intro">
 
-        <h1>Initiative API</h1>
-        <p>This landing page is a placehold for now</p>
+        <h1>Welcome to the Landing Page for my Python Flask Server!</h1>
+        <p>Quick Links</p>
         <ul id="urls_for_now">
             <li>
                 <a id="linkedin" href="https://www.linkedin.com/in/bill-lan-6aaa01147/">LinkedIn URL</a>
             </li>
-            
             <li>
                 <a id="github" href="https://github.com/bilan604">Github URL</a>
+            </li>
+            <li>
+                <a id="autoDataScience" href="https://colab.research.google.com/drive/1c_wFdg_MyLFYCHjqLVFvLqUyeQaJ5Sga?usp=sharing">Automatic Data Science Notebook</a>
             </li>
             
         </ul>
@@ -80,41 +28,41 @@
     </div>
 
 
-    <div id="gallery">
+    <div id="gallery" onmouseenter ="onMouseEnter(event)" onmouseout="onMouseOut(event)">
+        
+        <div>
+            <img class="gallery_image" src="static/itr604.png" alt="TensorFlow Image Project">
+        </div>
+        <div>
+            <img class="gallery_image" src="static/SeaTurtlePNG.png" alt="DiscordGPyT Project">
+        </div>
+        <div>
+            <img class="gallery_image" src="static/mlb_dominance_hier.png" alt="DiscordGPyT Project">
+        </div>
+        <div>
+            <img class="gallery_image" src="static/phi_and_e.png" alt="DiscordGPyT Project">
+        </div>
+        <div>
+            <iframe
+                src="static/sta160.mp4"
+                class="gallery_video"
+                autoplay
+                >
+            </iframe>
+        </div>
+        
+
+
 
         <div id="result_1">      
-            <h3>Find Questions</h3>
+            <h3>Ask Questions</h3>
             <form action="/" method="post">
                 <input type="text" name="query" placeholder="Enter a Question" autocomplete="off" required />
                 <input type="submit" value="Submit" />
             </form>
         </div>
 
-        <div id="result_2">
-            <h3>Ask Questions</h3>
-            <form action="/" method="post">
-                <input type="text" name="query_test" placeholder="Enter a Question" autocomplete="off" required />
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
-        
-        <div id="result_3">
-            <h3>Search</h3>
-            <form action="/" method="post">
-                <input type="text" name="search_query" placeholder="Enter a Query" autocomplete="off" required />
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
 
-        <div id="result_4">
-            <h3>Login</h3>
-            <form action="/" method="post">
-                <input type="text" name="login_username" placeholder="Username" autocomplete="off" required />
-                <input type="text" name="login_password" placeholder="Password" autocomplete="off" required />
-                <input type="submit" value="Login" />
-            </form>
-            <a id="create_an_account" href="www.yahoo.com" css="center">Create an Account</a>
-        </div>
 
     </div>
 

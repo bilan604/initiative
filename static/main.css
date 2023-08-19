@@ -33,7 +33,7 @@
   #intro {
     display: flex;
     flex-direction: column;
-    font-size: 16px;
+    font-size: 14px;
     max-width: 300px;
     color:white;
     border: 5px solid #03a9fc;
@@ -49,7 +49,7 @@
     user-select: none;
   }
   #create_an_account {
-    text-align: center
+    text-align: center;
   }
   .icon {
     width: 34px;
@@ -91,6 +91,13 @@
     object-fit: cover;
     object-position: 100% 0%;
     user-select: none;
+  }
+  .gallery_video {
+    height: 50vmin;
+    width: 50vmin;
+    object-fit: cover;
+    object-position: 100% 0%;
+    pointer-events: none;
   }
   #gallery {
     display: flex;

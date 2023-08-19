@@ -56,5 +56,8 @@ def index():
 def run_app():
     path = "/".join(os.getcwd().split("\\"))
     os.chdir(path)
-    app.run(host="10.0.0.179", port=8000)
+    try:
+       app.run(host="10.0.0.179", port=8000)
+    except:
+        app.run()
 

@@ -19,8 +19,6 @@ def askGPT3(key, query):
         print("Error on OpenAI API Call:", e)
         return ""
     
-
-
 def askGPT4(key, query):
     openai.api_key = key
     message=[{"role": "system", "content": "You are a helpful assistant."},{"role": "user", "content": query}]
@@ -32,3 +30,6 @@ def askGPT4(key, query):
             frequency_penalty=0.0
         ).choices[0].message.content.strip()
     return response
+
+
+

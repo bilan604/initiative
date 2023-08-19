@@ -17,6 +17,5 @@ def simple(sent):
     sent = sent.strip()
     return sent
 
-
 def simplify(s):
     return simple(s)
