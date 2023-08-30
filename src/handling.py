@@ -1,20 +1,27 @@
 import json
+import openai
+
 from src.handler.load.loading import check_contains
 from src.operator.search.searching import get_search_result_links
 from src.operator.search.searching import get_datatable, query_datatable
 from src.operator.question.extract import get_questions
-
-"""
-This file exists as a wrapper for the functionalities that are accessed,
-because inputs have to be verified and stuff, etc
-
-Perhaps it could serve as proxy for a the information in a system design interview?
-"""
+from src.operator.autoauto.AutoAuto import AutoAuto
 
 
 RULE = ""
 DATATABLES = {}
 
+def get_env(file_path=".env"):
+    env = {}
+    with open(file_path, "r") as f:
+        for line in f.readlines():
+            line = line.strip()
+            if line:
+                lst = line.split("=")
+                env[lst[0].strip()] = lst[1].strip()
+    return env
+
+openai.api_key = get_env()["OPENAI_API_KEY"].strip()
 
 def get_search_result_links(id, data):
     query = data.get("query", "")
@@ -24,9 +31,6 @@ def get_search_result_links(id, data):
 
 def load_datatable(id, data):
     global DATATABLES
-    """
-    Loads to RAM, is placeholder, replaceable component
-    """
 
     # add validations, etc
     id_present = check_contains("src/storage", id)
@@ -89,5 +93,22 @@ def get_extracted_questions(id, data):
     questions = get_questions(src, RULE)
     
     return questions
-            
+
+
+def prompt_autoauto(id, data):
+    prompt = data.get("query", "")
+    objective = prompt
+    print(objective)
+
+    AGI = AutoAuto(objective)
+    AGI.complete_objective()
+
+    print("\n===================>:")
+    print(AGI.result)
+    print("---------fin----------")
     
+    return AGI.result
+
+
+
+
