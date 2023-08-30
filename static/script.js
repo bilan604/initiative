@@ -24,7 +24,7 @@ function moveImages(e) {
     let newPos = newratio + (100 * (gallery.prevX / window.innerWidth));
 
     gallery.animate(
-        {transform: 'translate(-' + Math.min(100, Math.max(0, newPos)) +'%, -50%)'}, 
+        {transform: 'translate(-' + Math.min(100, Math.max(0, newPos)) +'%, -55%)'}, 
         {duration: 1200, fill: 'forwards'}
     );
 

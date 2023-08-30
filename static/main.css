@@ -65,6 +65,7 @@
     border: 1px solid #03a9fc;
     border-radius: 4px;
     margin-bottom: 24px;
+    position: center;
   }
   ::placeholder {
     color: #8e8ea0;
@@ -78,6 +79,7 @@
     border-radius: 4px;
     text-align: center;
     cursor: pointer;
+    position: center;
   }
   #gallery {
     display: flex;
@@ -125,4 +127,7 @@
     width: 40%;
     position: center;
     transform: translate(0%, -50%);
+  }
+  .autoauto_div {
+    width: 53vmin;
   }
