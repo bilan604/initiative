@@ -1,19 +1,19 @@
 .env
 
-# Handlers
-src/handler/document/
-src/handler/data_structures/
-src/handler/prompt/
-src/handler/parse/
+src/handler/
+src/handler/*
+*/src/handler/
+*/src/handler/*
 
-# Operators
-src/operator/answer/
-src/operator/search/
+src/operator/
+src/operator/*
+*/src/operator/
+*/src/operator/*
 
-# Pycaches
 __pycache__/
 */__pycache__/
 /__pycache__/*
 */__pycache__/*
 
-src/storage/bilan604/
+*/src/storage/
+*/src/storage/*
