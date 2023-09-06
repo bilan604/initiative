@@ -5,8 +5,6 @@ __pycache__/
 */__pycache__/
 */__pycache__/*
 
-static/*.png
-
 src/handler/
 src/handler/*
 src/operator/

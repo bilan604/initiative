@@ -3,8 +3,6 @@ import json
 from datetime import datetime
 from flask import Flask, request, redirect, render_template, url_for
 
-from src.handler.loader import update_src_env
-
 from src.handling import test
 from src.handling import get_search_result_links
 from src.handling import prompt_autoauto
@@ -50,8 +48,6 @@ def handle(request):
 
 @app.route("/api/", methods=("GET", "POST"))
 def api():
-    if DEVELOPMENT:
-        print("/api/ route called:")
 
     if request.method == "GET":
         return json.dumps({
@@ -73,7 +69,6 @@ def hello_world():
     response = ""
     if request.method == "POST":
         query = request.form['query']
-        print("Query", query)
         if query and len(query) > 0:
             response = handle_request_params('', 'prompt_autoauto', {
                 "query": query
@@ -82,14 +77,11 @@ def hello_world():
     
     return render_template('index.html', prompt_response=response)
 
-# a function to run this app from main.py
 def run_app(environment):
     global DEVELOPMENT
     path = "/".join(os.getcwd().split("\\"))
     if environment == 'development':
-        
-        DEVELOPMENT = True
-    update_src_env(DEVELOPMENT)            
+        DEVELOPMENT = True     
     os.chdir(path)
     app.run()
 
