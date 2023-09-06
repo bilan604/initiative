@@ -6,23 +6,23 @@
 
 </head>
 <body id="body" onmousedown="onMouseDown(event)" onmouseup="onMouseUp(event)" onmousedown="onMouseDown(event)" onmousemove="onMouseMove(event)" >
-    
+
     <div id="intro">
         <div><h2>Welcome to the landing page for my Flask server! </h2></div>
         <div><a id="github" href="https://github.com/bilan604">My Github</a></div>
         <div><a id="linkedin" href="https://www.linkedin.com/in/bill-lan-6aaa01147/">My LinkedIn</a></div>
     </div>
-    
+
     <div id="gallery" onmouseenter ="onMouseEnter(event)" onmouseout="onMouseOut(event)">
-        
-        <div id="result_1" class="autoauto_div">
+
+        <div id="result_1">
             <h3>AutoAuto Agent Project</h3>
             <p>Built on GPT-4, AutoAuto combines recursion, dynamic programming, and Language Models to answer questions.</p>
             <form action="/" method="post">
                 <input type="text" name="query" placeholder="Ask AutoAuto a Question" autocomplete="off" required />
                 <input type="submit" value="Submit" />
             </form>
-            
+
             {% if prompt_response %}
             <div style="width: 300px; height: 200px; border: 1px solid #000; overflow: auto;">
                 <div style="height: 400px;">
@@ -31,6 +31,10 @@
                 </div>
             </div>
             {% endif %}
+        </div>
+        <div>
+            <img class="gallery_image" src="static/autoauto.png" alt="" href="">
+            <a href="https://github.com/bilan604/AGI_plc">AutoAuto</a>
         </div>
         <div>
             <img class="gallery_image" src="static/mlb_dominance_hier.png" alt="" href="">
@@ -47,10 +51,6 @@
         <div>
             <img class="gallery_image" src="static/itr604.png" alt="TensorFlow Image">
             <a href="https://github.com/bilan604/GooglePagerank/blob/main/Page_Rank.pdf">TensforFlow Project</a>
-        </div>
-        <div>
-            <img class="gallery_image" src="static/agent.png" alt="LeetCode">
-            <a href="https://leetcode.com/lan32/">LeetCode</a>
         </div>
 
     </div>
