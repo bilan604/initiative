@@ -1,6 +1,8 @@
 # Initiative Endpoint  
 
-This is a local API endpoint that aggregates various operations and functionalities I have coded into one place. It includes functionalities such as finding questions and answering the questions with information I have stored, so that certain forms can be filled by providing a lambda function.
+The main reason this exists is because I would prefer to use git for my personal projects to be able to access the code accross devices. For now, this is an local API endpoint that aggregates various operations and functionalities I have coded into one place. It includes functionalities such as finding questions and answering the questions with information I have stored, so that certain forms can be filled by providing a lambda function.
+
+Note: Files required to run from a git clone may have been added to the gitignore.
 
 ## Running:
 1. git clone this repo
@@ -12,6 +14,7 @@ python main.py
 in git bash
 
 #### Pinging:  
+<<<<<<< HEAD
 The landing page is set as:  
 http://10.0.0.179:8000  
 
@@ -74,4 +77,7 @@ Question: Are you comfortable working in a hybrid setting?
 Question: Are you comfortable commuting to this job's location?
 """
 ```
+=======
+http://bilan604.pythonanywhere.com/
+>>>>>>> 2aa69a78a56d6659452f32bebe25a921cb9c1f07
 
