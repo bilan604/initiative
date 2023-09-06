@@ -57,19 +57,16 @@ def api():
 @app.route("/", methods=("GET", "POST"))
 def hello_world():
     if request.method == "POST":
-        curr = datetime.now()
         global prev_time
+        curr = datetime.now()
         diff = get_seconds_between_datetimes(prev_time, curr)
-        print("diff", diff)
         if diff < 15:
             return render_template('index.html', prompt_response="")
-        
         data = {
             "query": request.form["query"]
         }
         response = handle("", "prompt_autoauto", data)
-        new_curr = datetime.now()
-        prev_time = new_curr
+        prev_time = curr
         return render_template("index.html", prompt_response=response)
     
     return render_template('index.html', prompt_response="")

@@ -3,20 +3,11 @@
 static/
 tests/
 
-src/handler/
 src/handler/*
-*/src/handler/
-*/src/handler/*
-
-src/operator/
 src/operator/*
-*/src/operator/
-*/src/operator/*
+src/storage/*
 
 __pycache__/
 */__pycache__/
 /__pycache__/*
 */__pycache__/*
-
-*/src/storage/
-*/src/storage/*
