@@ -78,9 +78,9 @@ def hello_world():
             response = handle_request_params('', 'prompt_autoauto', {
                 "query": query
             })
-        return render_template('index.html', prompt_response=response)
+        return render_template('index.html', prompt_response=response, DEVELOPMENT=DEVELOPMENT)
     
-    return render_template('index.html', prompt_response=response)
+    return render_template('index.html', prompt_response=response, DEVELOPMENT=DEVELOPMENT)
 
 # a function to run this app from main.py
 def run_app(environment):

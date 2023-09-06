@@ -1,19 +1,14 @@
 .env
-
-__pycache__
-__pycache__/
-*/__pycache__/
-*/__pycache__/*
-
 static/*.png
 
-src/handler/
+__pycache__/
+*/__pycache__/
+
 src/handler/*
-src/operator/
 src/operator/*
-src/storage/
 src/storage/*
 
-tests.py
-note.txt
+!src/handler/__init__.py
+!src/handler/loader.py
+!src/operator/__init__.py
 
