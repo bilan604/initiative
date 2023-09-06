@@ -1,5 +1,8 @@
 .env
 
+static/
+tests/
+
 src/handler/
 src/handler/*
 */src/handler/
