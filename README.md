@@ -49,11 +49,12 @@ pip install --upgrade pip
 ## Calling the API
 ```
 # No id has to be specified to request the API as of now
+import json
+import requests
 
 def ping_autoauto():
-    import requests
+    
     URL = 'http://bilan604.pythonanywhere.com/api/'
-
     pars = {
         'id': '',
         'operation': 'prompt_autoauto',
@@ -64,7 +65,7 @@ def ping_autoauto():
 
     resp = requests.post(URL, params=pars)
     print(resp.text)
-    return resp.text  # remember to json.loads()
+    return resp.text  # remember to json.loads()! :)
 
 ping_autoauto()
 ```
