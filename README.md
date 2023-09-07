@@ -8,7 +8,7 @@ View Most recent build running:
 [Website](http://bilan604.pythonanywhere.com)  
 
 View The Original Quickstart Tutorial Template:
-[https://github.com/openai/openai-quickstart-python](OpenAI Python Quickstart Tutorial)
+[OpenAI Python Quickstart Tutorial](https://github.com/openai/openai-quickstart-python)
 
 
 ## Running the Server:
