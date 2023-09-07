@@ -44,6 +44,33 @@ Upgrade pip. Older versions of packages can cause code to behave unexpectedly wi
 pip install --upgrade pip
 ```
 
-View The Quickstart Tutorial that I learned Flask from:
-[https://github.com/openai/openai-quickstart-python](OpenAI Python Quickstart Tutorial)
+## Calling the API
+```
+# No id has to be specified to request the API as of now
+
+def ping_autoauto():
+    import requests
+    URL = 'http://bilan604.pythonanywhere.com/api/'
+
+    pars = {
+        'id': '',
+        'operation': 'prompt_autoauto',
+        'request_data': json.dumps({
+            'query': 'Ping'
+        })
+    }
+
+    resp = requests.post(URL, params=pars)
+    print(resp.text)
+    return resp.text  # remember to json.loads()
+
+ping_autoauto()
+```
+
+## Operations
+
+Not all are going to be listed, because this is more of a personal API, but here are two of the more helpful ones.
+
+1. prompt_autoauto: Prompts autoauto, like on the landing page . request_data takes ```query```. 
+2. get_search_result_urls: Gets the urls from Google search results for a query. request_data takes ```query```. 
 
