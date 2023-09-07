@@ -7,11 +7,8 @@ Originally developed from the OpenAI quickstart tutorial, the updated ```flask_a
 View Most recent build running:  
 [Website](http://bilan604.pythonanywhere.com)  
 
-View The Original Quickstart Tutorial Template: (localhost)  
+View The (localhost) Quickstart Tutorial Template:
 [OpenAI Python Quickstart Tutorial](https://github.com/openai/openai-quickstart-python)
-
-## View Most recent build running:  
-[http://bilan604.pythonanywhere.com](Website)
 
 ## Requirements
 1. git bash
