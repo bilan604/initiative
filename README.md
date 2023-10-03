@@ -70,10 +70,3 @@ def ping_autoauto():
 ping_autoauto()
 ```
 
-## Operations
-
-Not all are going to be listed, because this is more of a personal API, but here are two of the more helpful ones.
-
-1. prompt_autoauto: Prompts autoauto, like on the landing page . request_data takes ```query```. 
-2. get_search_result_urls: Gets the urls from Google search results for a query. request_data takes ```query```. 
-
