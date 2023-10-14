@@ -69,4 +69,5 @@ def get_questions(url: str) -> list[dict]:
 
 Here is an example of one of the functionalities, get_questions, which loads user input questions given a url in a form agnostic manner.  
 
-![Loading Questions from a webpage]([http://url/to/img.png](https://github.com/bilan604/initiative/blob/main/static/using_api.png)https://github.com/bilan604/initiative/blob/main/static/using_api.png)
+![Loading Questions from a webpage](https://github.com/bilan604/initiative/blob/main/static/using_api.png)  
+
