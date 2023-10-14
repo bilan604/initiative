@@ -44,6 +44,7 @@ pip install --upgrade pip
 ```
 
 ## Calling the API  
+
 Here is the post request format for calling the API:  
 ```
 import json

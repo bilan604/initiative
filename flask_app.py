@@ -59,8 +59,7 @@ operationKwargsFunctionsMap = {
 }
 
 PREV = {operation: datetime.now() for operation in operationFunctionsMap.keys()}
-# No cooldown, counts uses, remove other ones someday
-ELEVATED = {get_access_id(): 0, "bilan604": 0, "notLan32": 0}
+ELEVATED = {}
 
 LIMITS = {
     'prompt_autoauto': 60,
