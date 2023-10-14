@@ -1,24 +1,12 @@
 .env
-<<<<<<< HEAD
 
 __pycache__
 __pycache__/
 */__pycache__/
 */__pycache__/*
 
-src/handler/
-=======
-static/*.png
-
-__pycache__/
-*/__pycache__/
-
->>>>>>> 74fb4bb3b27f467174750e08cac12aba092d58f4
 src/handler/*
-src/operator/*
-src/storage/*
-
 !src/handler/__init__.py
-!src/handler/loader.py
-!src/operator/__init__.py
+src/operator/*
+!src/handler/__init__.py
 

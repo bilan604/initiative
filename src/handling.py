@@ -1,24 +1,40 @@
-from src.operator.searching import get_search_result_links
-from src.operator.autoauto.AutoAuto import AutoAuto
+from src.generic.loader import get_access_id
 
-
-def test(id, data):
-    print(data)
 from src.handler.loader import get_handler_env
+
+from src.handler.requester import askGPT35
+from src.handler.requester import askGPT4
+
+from src.operator.autoauto.AutoAuto import AutoAuto
+from src.operator.searching import get_search_result_links
+from src.operator.forms import get_questions as __get_questions
+
+from src.operator.nf_operator import __get_notefinder
+from src.operator.nf_operator import __add_notefinder
+from src.operator.nf_operator import __load_notefinder
+from src.operator.nf_operator import __query_notefinder
+from src.operator.nf_operator import __update_access
+
+from src.handler.requester import ask_GPT
 
 
 DEVELOPMENT = False
+TEXT_STORE_ACCESS_ID = get_access_id()
+TEXTS_STORED = {'1': 'The default text stored on initialization'}
+
+
 if get_handler_env() == 'True':
     DEVELOPMENT = True
 
-
 def test(id, data):
-    # Handle the http request as if it were a normal http request here.
     if DEVELOPMENT == True:
         print(data)
-    # return the response to the request, which will be handled in the request handler in flask_app.py
     return True
 
+def get_search_result_urls(id, data):
+    query = data.get("query", "")
+    result_urls = get_search_result_links(query)
+    return result_urls
 
 def prompt_autoauto(id, data):
     prompt = data.get("query", "")
@@ -26,23 +42,120 @@ def prompt_autoauto(id, data):
     AGI = AutoAuto(objective)
     AGI.complete_objective()
     return AGI.result
-if DEVELOPMENT == True:
-    from src.operator.searching import get_search_result_links
-    from src.operator.autoauto.AutoAuto import AutoAuto
 
+def ask_openai(id, data):
+    if 'model' in data:
+        return ask_GPT(data['api_key'], data['query'], data['model'])
+    return ask_GPT(data['api_key'], data['query'])
 
-    def get_search_result_links(id, data):
-        query = data.get("query", "")
-        result_urls = get_search_result_links(query)
-        return result_urls
+def ask_GPT35(id, data):
+    prompt = data.get("query", "")
+    if not prompt:
+        return "[NO_PROMPT_PROVIDED]"
+    return askGPT35(prompt)
 
-    def prompt_autoauto(id, data):
-        prompt = data.get("query", "")
-        objective = prompt
-        AA = AutoAuto(objective)
-        AA.complete_objective()
-        return AA.result
+def ask_GPT4(id, data):
+    prompt = data.get("query", "")
+    if not prompt:
+        return "[NO_PROMPT_PROVIDED]"
+    return askGPT4(prompt)
 
+def get_notefinder(id: str, data: dict):
+    if "table_name" not in data:
+        return "Table name not specified"
+    table_name = data["table_name"]
+    return __get_notefinder(id, table_name)
 
+def add_notefinder(id: str, data: dict):
+    if "table_name" not in data:
+        return "Table name not specified"
+    if "questions" not in data:
+        return "Questions not specified"
+    if "answers" not in data:
+        return "Answers not specified"
+    table_name = data["table_name"]
+    questions = data["questions"]
+    answers = data["answers"]
+    return __add_notefinder(id, table_name, questions, answers)
 
+def update_notefinder(id: str, data: dict):
+    return add_notefinder(id, data)
+
+def create_notefinder(id: str, data: dict):
+    return add_notefinder(id, data)
+
+def load_notefinder(id: str, data: dict):
+    if "table_name" not in data:
+        return "Table name not specified"
+    table_name = data["table_name"]
+    return __load_notefinder(id, table_name)
+
+def query_notefinder(id: str, data: dict):
+    if "table_name" not in data:
+        return "Table name not specified"
+    if "query" not in data:
+        return "Query not specified"
+    table_name = data["table_name"]
+    query = data["query"]
+    return __query_notefinder(id, table_name, query)
+
+def update_access(id: str, data: dict):
+    if "password" not in data:
+        return "password"
+    if "access" not in data:
+        return "access note specified"
+    password = data["password"]
+    access = data["access"]
+    return __update_access(id, password, access)
+
+def ask_GPT(id: str, data: dict):
+    if "api_key" not in data:
+        return "API key not specified"
+    if "query" not in data:
+        return "Query not specified"
+    if "model" not in data:
+        return "Model not specified"
+    return ask_GPT(id, data["api_key"], data["query"], data["model"])
+
+def prompt_stable_diffusion(id: str, data: dict) -> list[str]:
+    if "prompt" not in data:
+        return "prompt not specified"
+    prompt = data["prompt"]
+    try:
+        resp = __prompt_stable_diffusion(prompt)
+        return resp
+    except Exception as e:
+        return [str(e)]
+
+def get_stored_text(text_id):
+    global TEXTS_STORED
+    if text_id not in TEXTS_STORED:
+        return "text_id route not created yet"
+    print("Getting stored text", text_id, TEXTS_STORED[text_id])
+    return TEXTS_STORED[text_id]
+
+def update_stored_text(id, data: str):
+    global TEXTS_STORED
+    if id != TEXT_STORE_ACCESS_ID:
+        return "Invalid id"
+    if data == None:
+        return "request_data not provided"
+    # data is the string text
+    text_id, text = data.split('||||||||')
+    TEXTS_STORED[text_id] = text
+    return "Success"
+
+def get_questions(id, data):
+    url = ''
+    if 'url' in data:
+        url = data['url']
+    if 'link' in data:
+        url = data['link']
+    if not url:
+        return "No url provided in request data"
+    try:
+        questions = __get_questions(url)
+        return questions
+    except Exception as e:
+        return f"Error occured: {str(e)}"
 

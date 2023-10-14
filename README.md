@@ -2,13 +2,8 @@
 
 A Python Flask Server and flask server template for aggregating parallel processes. By aggregating various functionalities into a backend which is hosted online, I can access my code accross devices, virtual envs, and repositories.  
 
-Originally developed from the OpenAI quickstart tutorial, the updated ```flask_app.py``` and new ```handling.py``` files are an example / template backend python server demonstrating modular implementation of functionalities. By specifying the operation inside the request data, and the request data as well, a single function map allows for all requests to be handled in a single file, ```src/handling.py```, while the code for the functionalities can be added to a folder or file in src/operator or src/handler.
-
 View Most recent build running:  
 [Website](http://bilan604.pythonanywhere.com)  
-
-View The (localhost) Quickstart Tutorial Template:
-[OpenAI Python Quickstart Tutorial](https://github.com/openai/openai-quickstart-python)
 
 ## Requirements
 1. git bash
@@ -46,7 +41,7 @@ Upgrade pip. Older versions of packages can cause code to behave unexpectedly wi
 pip install --upgrade pip
 ```
 
-## Calling the API
+## Calling the API  
 ```
 # No id has to be specified to request the API as of now
 import json
