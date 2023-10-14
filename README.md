@@ -30,13 +30,15 @@ pip install -r requirements.txt
 python main.py
 ```
 
+Running main.py locally automatically sets the environment variable in handling to True. The app is run from flask_app.py in production.  
+
 ## Troubleshooting  
-Check the python version
+If you encounter any errors, try checking the Python version  
 ```
 python --version
 ```
 
-Upgrade pip. Older versions of packages can cause code to behave unexpectedly without warning.
+or upgrading pip. Older versions of packages can cause code to behave unexpectedly, sometimes without warning.
 ```
 pip install --upgrade pip
 ```
