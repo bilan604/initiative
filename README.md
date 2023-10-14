@@ -42,26 +42,31 @@ pip install --upgrade pip
 ```
 
 ## Calling the API  
+Here is the post request format for calling the API:  
 ```
-# No id has to be specified to request the API as of now
 import json
 import requests
 
-def ping_autoauto():
-    
-    URL = 'http://bilan604.pythonanywhere.com/api/'
+URL = 'http://bilan604.pythonanywhere.com'
+
+def get_questions(url: str) -> list[dict]:
     pars = {
-        'id': '',
-        'operation': 'prompt_autoauto',
-        'request_data': json.dumps({
-            'query': 'Ping'
+        "id": "bilan604",
+        "operation": "get_questions",
+        "request_data": json.dumps({
+            'url': url
         })
     }
-
-    resp = requests.post(URL, params=pars)
+    resp = requests.post(f'{URL}/api/', params=pars)
+    if resp.status_code == 200:
+        message = json.loads(resp.text)
+        questions = message["message"]
+        return questions
+    print("Error:")
     print(resp.text)
-    return resp.text  # remember to json.loads()! :)
-
-ping_autoauto()
+    return []
 ```
 
+Here is an example of one of the functionalities, get_questions, which loads user input questions given a url in a form agnostic manner.  
+
+![Loading Questions from a webpage]([http://url/to/img.png](https://github.com/bilan604/initiative/blob/main/static/using_api.png)https://github.com/bilan604/initiative/blob/main/static/using_api.png)
