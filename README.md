@@ -12,13 +12,6 @@ Now, the flask server url below is backend API endpoint for me and my friends' p
 
 NOTE: This repository isn't the actual repository for the url above. Since I added the code for most of the functionalities in the .gitignore, but wanted to make the repository public as well, I have changed this repository so that it is basically a flask tutorial to help people get into Python/Flask. (Its more exciting than learning for loops! :D)
 
-## System Requirements
-Python 3.11
-Node.js v18.15.0
-Git Bash
-Internet Connection
-5 minutes
-
 ## Installation Requirements (Python Modules)
 
 1. Navigate to where you want the folder to be and clone the repository.
