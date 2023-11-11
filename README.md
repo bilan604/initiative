@@ -12,32 +12,24 @@ Now, the flask server url below is backend API endpoint for me and my friends' p
 
 NOTE: This repository isn't the actual repository for the url above. Since I added the code for most of the functionalities in the .gitignore, but wanted to make the repository public as well, I have changed this repository so that it is basically a flask tutorial to help people get into Python/Flask. (Its more exciting than learning for loops! :D)
 
-## Installation Requirements (Python Modules)
-
-1. Navigate to where you want the folder to be and clone the repository.
+## Installation
+1. Navigate the folder that you want the project to be in.
+2. Git clone this repository and navigate to the folder.
 ```
 git clone https://github.com/bilan604/initiative.git
+cd ./initiative
 ```
-
-2. Navigate to the folder
-```
-cd initiative
-```
-
 3. Install the requirements
 ```
 pip install -r requirements.txt
 ```
-
-4. To install the Python Modules run ```pip install requirements.txt``` in the bash console.  
 
 ## Running  
 Git Bash
 ```
 python main.py
 ```
-
-Running main.py locally automatically sets the environment variable in handling to True. The app is run from flask_app.py in production. 
+Running main.py locally automatically sets the environment variable DEVELOPMENT to true. The variable is used for console logs and is ONLY true when the app is run from the file "__main__.py".
 
 ## Troubleshooting  
 If you encounter any errors installing requirements from ```requirements.txt``` just use pip to install them mannually like ```pip install beautifulsoup4``.
