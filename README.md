@@ -4,7 +4,7 @@
 ## Intro:
 I started this project because I realized that a lot of the code I was writting for unrelated personal projects, for fun, and for assigned projects were similar in nature, but not concrete enough or important enough to make a Github repository for. 
 
-Realizing that this could be overcome by placing the repetitive functionalities from different repositories together in a single repository, I decided to make an API and aggregate old projects into a this single project, but instead of making seperate API routes for them, just giving them a name.
+Realizing that this could be overcome by placing the repetitive functionalities from different repositories together in a single repository, I decided to make an API and aggregate isolated functionalities from old projects into this single project, but instead of making seperate API routes for them, just giving each functionality a name for the operation that it performs.
 
 Now, the flask server url below is backend API endpoint for me and my friends' projects - allowing functionalities to be accessed without git cloning or pip installations in remote environments.
 
