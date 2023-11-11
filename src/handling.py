@@ -8,6 +8,8 @@ if get_handler_env() == 'True':
     DEVELOPMENT = True
 
 def test(id, data):
+    # request_data can be an empty json when sending a request
+    # to the test route
     if DEVELOPMENT == True:
         print(data)
     return True
