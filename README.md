@@ -79,7 +79,7 @@ print(use_api(pars))
 
 ## Public functionalities for this project:  
 
-These endpoints don't require and id and are free to use (electricity not included), but there is a rate limiter for requests. Feel free to try them out or continue using as much as neccessary.  
+These endpoints don't require and id and are free to use (electricity not included). Feel free to try them out or continue using them, they're free because there's a rate limiter on operations.  
 
 #### SERP API:
 
