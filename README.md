@@ -53,7 +53,7 @@ python3.11 -m pip install --upgrade pip
 
 ## Post Request Format  
 
-The /api/ endpoint takes an id, the desired functionality (similar to specifying 'Content-Type' in the headers for a post request, but for the route itself), and the request_data which is a json string containing the parameters for the function.
+The /api/ endpoint takes an id, the desired functionality (similar to specifying 'Content-Type' in the headers for a post request, but for the route itself), and the request_data which is a json string containing the parameters for the function. (This is literally the chunk of code I copy to use it)
 
 ```
 import json
