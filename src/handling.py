@@ -7,14 +7,16 @@ DEVELOPMENT = False
 if get_handler_env() == 'True':
     DEVELOPMENT = True
 
-def test(id, data):
-    # request_data can be an empty json when sending a request
-    # to the test route
+
+def hello_world(id: str, data: dict) -> str:
+    return "Hello World!"
+
+def test(id: str, data: dict) -> bool:
     if DEVELOPMENT == True:
         print(data)
     return True
 
-def your_api_functionality(id, data):
+def your_api_functionality(id: str, data: dict) -> any:
     def isValidForFunctionality(id): 
         # check the requests!
         return True
