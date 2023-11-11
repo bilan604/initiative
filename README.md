@@ -88,7 +88,7 @@ pars = {
 print(use_api(pars))
 ```
 
-#### Example: Checking API connection after you've git clone and running main  
+#### Example: testing connection for application after running main.py  
 ![Implement your first API route!](https://github.com/bilan604/initiative/blob/main/static/use_api.png)  
 
 
