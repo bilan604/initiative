@@ -1,6 +1,6 @@
 # python-server
 
-A Python Flask Server and flask server template for aggregating parallel processes. By aggregating various functionalities into a backend which is hosted online, I can access my code accross devices, virtual envs, and repositories.  
+A Python Flask Server and flask server template for aggregating parallel processes. By aggregating various functionalities into a backend which is hosted online, I can access my code accross devices, virtual envs, and repositories. There is a landing page containing my portfolio, but its mostly incomplete and I will be leaving it as is until I've decided what I want to do with this project long term.  
 
 View Most recent build running:  
 [Website](http://bilan604.pythonanywhere.com)  
@@ -43,31 +43,28 @@ or upgrading pip. Older versions of packages can cause code to behave unexpected
 pip install --upgrade pip
 ```
 
-## Calling the API  
+## Post Request Format  
 
-Here is the post request format for calling the API:  
+The /api/ endpoint takes an id, the desired functionality (similar to specifying 'Content-Type' in the headers for a post request, but for the route itself), and the request_data which is a json string containing the parameters for the function.
+
 ```
 import json
 import requests
 
-URL = 'http://bilan604.pythonanywhere.com'
+def use_api(pars: dict) -> list[dict]:
+    resp = requests.post(f'http://bilan604.pythonanywhere.com/api/', params=pars).text
+    content = json.loads(resp)["message"]    
+    return content
 
-def get_questions(url: str) -> list[dict]:
-    pars = {
-        "id": "bilan604",
-        "operation": "get_questions",
-        "request_data": json.dumps({
-            'url': url
-        })
-    }
-    resp = requests.post(f'{URL}/api/', params=pars)
-    if resp.status_code == 200:
-        message = json.loads(resp.text)
-        questions = message["message"]
-        return questions
-    print("Error:")
-    print(resp.text)
-    return []
+
+pars = {
+    "id": "bilan604",
+    "operation": "get_search_result_urls",
+    "request_data": json.dumps({
+        'query': 'What is the capital of Argentina?'
+    })
+}
+print(use_api(pars))
 ```
 
 Here is an example of one of the functionalities, get_questions, which loads user input questions given a url in a form agnostic manner.  
