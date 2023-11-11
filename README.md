@@ -152,5 +152,3 @@ If so, then this is the repo for you!
 
 Git clone this project and run main.py so that you can host your website AND/OR API endpoint, using a simple, intuitive, atomic, and most importantly, scalable backend architecture to give your code an API route!
 
-
-
