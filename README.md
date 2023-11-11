@@ -74,3 +74,53 @@ Here is an example of one of the functionalities, get_questions, which loads use
 
 ![Loading Questions from a webpage](https://github.com/bilan604/initiative/blob/main/static/using_api.png)  
 
+
+## Operations:  
+
+These endpoints don't require and id and are free to use, but there is a rate limiter for requests. Feel free to try them out or continue using as much as neccessary. :)   
+
+#### SERP API:
+
+Returns the first page of urls for a search result.
+
+```
+    pars = {
+        'id': '',
+        'operation': 'get_search_result_urls',
+        'request_data': json.dumps({
+            'query': '[string: the search query]',
+        })
+    }
+```
+response: A message containing a list of search result urls
+
+#### SERP API Again:
+
+Tries to get n urls for search results, for a maximum of n=100 urls.
+
+```
+    pars = {
+        'id': '',
+        'operation': 'get_n_search_results',
+        'request_data': json.dumps({
+            'query': '[string: the search query]',
+            'n': [integer: desired number of results]
+        })
+    }
+```
+response: A message containing a list of n search result urls
+
+#### HTML User Input Element Scrapper:
+
+Good for selenium based projects.
+
+```
+    pars = {
+        "id": "",
+        "operation": "get_questions",
+        "request_data": json.dumps({
+            'url': url
+        })
+    }
+```
+response: a list of objects containing the question, html type of the question element of the question, and a list of the answer options (a list containing the label for the option and the element of the option) if present
