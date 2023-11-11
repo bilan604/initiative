@@ -131,7 +131,7 @@ response: a list of objects containing the question, html type of the question e
 I made an API endpoint and am doing all my projects here but the code is not open source so I made a Flask API tutorial based off my project as an item to list in my project experiences. Also, free SERP API.
 
 ## TLDR: should I git clone?  
-Looking for a fun/silly/challenging project to help you learn Python? Tired of circular dependencies? Itching to refactor even though you hate refactoring? Want to access existing code without another git init or docker compose? Simply need a flask template to quickstart something you had in mind? Need a production backend with architecture that can scale functionalities like AWS scales services?
+Looking for a fun/silly/challenging project to help you learn Python? Tired of circular dependencies? Hate refactoring and itching to refactor things? Want to access existing code without another git init or docker compose? Simply need a flask template to quickstart something you had in mind? Need a production backend with architecture that can scale functionalities like AWS scales services?
 
 If so, then this is the repo for you!
 
