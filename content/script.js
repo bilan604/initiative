@@ -3,10 +3,6 @@ vars.set("activeTopBar", "");
 vars.set("clientX", 0);
 vars.set("prevTime", new Date());
 vars.set("clicked", false);
-vars.set("discordGPyT.png", "https://github.com/bilan604/discordGPyT");
-vars.set("dataScienceAutomation.png", "https://colab.research.google.com/drive/1c_wFdg_MyLFYCHjqLVFvLqUyeQaJ5Sga");
-vars.set("mlb.png", "https://github.com/bilan604/MLB-Dominance-Heirarchy/blob/main/RankingTheMLB.pdf");
-vars.set("pageRank.png", "https://github.com/bilan604/GooglePagerank/blob/main/Page_Rank.pdf");
 
 
 function openNewTab(url) {
@@ -133,10 +129,6 @@ function handleGalleryMovement(e) {
   
 }
 
-
-
-  
-
 function onMouseMove(e) {
   let now = new Date();
   console.log(now - vars.get("prevTime"));
@@ -157,17 +149,5 @@ function onMouseMove(e) {
 
 
 
-function init() {
-    let gallery = document.getElementById("gallery");
-    if (gallery.style.left === "") {
-      gallery.style.left = "0%";
-    }
-    if (gallery.style.width === "") {
-      gallery.style.width = "250%";
-    }
-    if (gallery.style.transform === "") {
-      gallery.style.transform = "translate(0%, 0%)";
-    }
-}
-init();
+
 

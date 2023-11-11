@@ -5,10 +5,12 @@ __pycache__/
 */__pycache__/
 */__pycache__/*
 
+
+
 src/handler/*
 !src/handler/__init__.py
 src/operator/*
 !src/handler/__init__.py
-!src/handler/algos.py
+!src/handler/parser.py
 !src/operator/forms.py
 

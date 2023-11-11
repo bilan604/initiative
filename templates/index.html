@@ -1,57 +1,12 @@
 <!DOCTYPE html>
 <head>
-  <title>Portfolio</title>
-  <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet"  />
-  <script src="static/script.js"></script>
-
+  <title>Welcome to Flask!</title>
+  <script src="front_end/script.js"></script>
 </head>
-<body id="body" onmousedown="onMouseDown(event)" onmouseup="onMouseUp(event)" onmousedown="onMouseDown(event)" onmousemove="onMouseMove(event)" >
-
-    <div id="intro">
-        <div><h2>Welcome to the landing page for my Flask server! </h2></div>
-        <div><a id="github" href="https://github.com/bilan604">My Github</a></div>
-        <div><a id="linkedin" href="https://www.linkedin.com/in/bill-lan-6aaa01147/">My LinkedIn</a></div>
-        <div><a id="linkedin" href="https://github.com/bilan604/initiative">Reference Github Repository for this website</a></div>
+<body>
+    <div id="content">
+        Hello Flask!
     </div>
-
-    <div id="gallery" onmouseenter ="onMouseEnter(event)" onmouseout="onMouseOut(event)">
-
-        <div id="result_1">
-            <h3>AutoAuto Agent Project</h3>
-            <p>Built on GPT-4, AutoAuto combines recursion, dynamic programming, and Language Models to answer questions.</p>
-            <form action="/" method="post">
-                <input type="text" name="query" placeholder="Ask AutoAuto a Question" autocomplete="off" required />
-                <input type="submit" value="Submit" />
-            </form>
-
-            {% if prompt_response %}
-            <div style="width: 300px; height: 200px; border: 1px solid #000; overflow: auto;">
-                <div style="height: 400px;">
-                    <!-- Content that is taller than the parent div -->
-                    {{ prompt_response }}
-                </div>
-            </div>
-            {% endif %}
-        </div>
-        <div>
-            <img class="gallery_image" src="static/autoauto.png" alt="" href="">
-            <a href="https://github.com/bilan604/AGI_plc">AutoAuto</a>
-        </div>
-        <div>
-            <img class="gallery_image" src="static/mlb_dominance_hier.png" alt="" href="">
-            <a href="https://github.com/bilan604/MLB-Dominance-Heirarchy/blob/main/RankingTheMLB.pdf">MLB Dominance Hierarchy</a>
-        </div>
-        <div>
-            <img class="gallery_image" src="static/SeaTurtlePNG.png" alt="DiscordGPyT" href="">
-            <a href="https://github.com/bilan604/discordGPyT">Discord Bot</a>
-        </div>
-        <div>
-            <img class="gallery_image" src="static/phi_and_e.png" alt="">
-            <a href="https://github.com/bilan604/GooglePagerank/blob/main/Page_Rank.pdf">PageRank Project</a>
-        </div>
-        <div>
-            <img class="gallery_image" src="static/itr604.png" alt="TensorFlow Image">
-            <a href="https://github.com/bilan604/GooglePagerank/blob/main/Page_Rank.pdf">TensforFlow Project</a>
-        </div>
-    </div>
+    <script src="script.js"></script>
 </body>
+</html>
