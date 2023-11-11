@@ -6,7 +6,11 @@ from src.handler.requester import askGPT35
 from src.handler.requester import askGPT4
 
 from src.operator.autoauto.AutoAuto import AutoAuto
+
+from src.operator.searching import google_search as __google_search
 from src.operator.searching import get_search_result_links
+from src.operator.searching import google_search_pages as __google_search_pages
+
 from src.operator.forms import get_questions as __get_questions
 
 from src.operator.nf_operator import __get_notefinder
@@ -15,7 +19,12 @@ from src.operator.nf_operator import __load_notefinder
 from src.operator.nf_operator import __query_notefinder
 from src.operator.nf_operator import __update_access
 
+from src.operator.products import get_product_url as __get_product_url
+from src.operator.products import get_product_urls as __get_product_urls
+
 from src.handler.requester import ask_GPT
+
+from src.operator.proxy import get as __get
 
 
 DEVELOPMENT = False
@@ -31,9 +40,24 @@ def test(id, data):
         print(data)
     return True
 
-def get_search_result_urls(id, data):
+def google_search(id, data):
+    if "query" not in data:
+        return ["No query provided"]
     query = data.get("query", "")
-    result_urls = get_search_result_links(query)
+    result_urls = __google_search(query)
+    return result_urls
+
+def get_search_result_urls(id, data):
+    return google_search(id, data)
+
+def google_search_pages(id, data):
+    if "query" not in data:
+        return ["No query provided"]
+    query = data.get("query", "")
+    n = data.get("n", "") # num results
+    if not n or type(n) == int:
+        n = str(n)
+    result_urls = __google_search_pages(query, n)
     return result_urls
 
 def prompt_autoauto(id, data):
@@ -159,3 +183,23 @@ def get_questions(id, data):
     except Exception as e:
         return f"Error occured: {str(e)}"
 
+def get_product_url(id, data) ->list[str]:
+    if "product_description" not in data:
+        return "No product_description provided"
+
+    desc = data["product_description"]
+    url = __get_product_url(desc)
+    return url
+
+def get_product_urls(id, data) ->list[str]:
+    if "product_description" not in data:
+        return "No product_description provided"
+
+    desc = data["product_description"]
+    urls = __get_product_urls(desc)
+    return urls
+
+def get(id, data) -> str:
+    url = data["url"]
+    src = __get(url)
+    return src

@@ -1,128 +1,226 @@
-@font-face {
-    font-family: "ColfaxAI";
-    src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
-        format("woff2"),
-      url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
-    font-weight: normal;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: "ColfaxAI";
-    src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
-      url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
-    font-weight: bold;
-    font-style: normal;
-  }
-  body,
-  input {
-    font-size: 16px;
-    line-height: 24px;
-    color: black;
-    font-family: "ColfaxAI", Helvetica, sans-serif;
-    overflow: auto;
-  }
-  body {
-    display: flex;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    color: white;
-    background-color: black;
-    margin: 0rem;
-    overflow: hidden;
-  }
-  #intro {
-    font-size: 16px;
-    color:white;
-    border: 5px solid #03a9fc;
-    padding: 10px 10px;
-    border-radius: 1px;
-    user-select: none;
-    position: absolute;
-    height:25%;
-    width:25%;
-  }
-  #create_an_account {
-    text-align: center;
-  }
-  .icon {
-    width: 34px;
-  }
-  h3 {
-    font-size: 20px;
-    line-height: 25px;
-    font-weight: bold;
-    color: white;
-    margin: 16px 0 25px;
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-  }
-  input[type="text"] {
-    padding: 12px 16px;
-    border: 1px solid #03a9fc;
-    border-radius: 4px;
-    margin-bottom: 24px;
-  }
-  ::placeholder {
-    color: #8e8ea0;
-    opacity: 1;
-  }
-  input[type="submit"] {
-    padding: 12px 0;
-    color: #fff;
-    background-color: #03a9fc;
-    border: none;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
-  }
-  #gallery {
-    display: flex;
-    gap: 4vmin;
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    padding: 15px 15px;
-    border-radius: 25px;
-    background-color: black;
-    transform: translate(0%, -50%);
-  }
-    .div-box {
-      text-align: center;
-    }
-    .gallery_image {
-      height: 50vmin;
-      width: 50vmin;
-      object-fit: cover;
-      object-position: 100% 0%;
-      user-select: none;
-    }
-    .gallery_video {
-      height: 50vmin;
-      width: 50vmin;
-      object-fit: cover;
-      object-position: 100% 0%;
-    }
-    .gallery_video_container {
-      user-select: none;
-    }
-    #gallery_image_link {
-      text-align: center;
-    }
-  .iframe {
-    height: 50%;
-    width: 50%;
-    position: center;
-    background-color: black;
-    transform: translate(0%, -50%);
-  }
-  #img {
-    display: flex;
-    height: 40%;
-    width: 40%;
-    position: center;
-    transform: translate(0%, -50%);
-  }
+body {
+  position: absolute;
+  top: -1%;
+  left: -1%;
+  width: 100%;
+  height: 206%;
+  
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 4px solid black;
+}
+.imageLabel {
+  position: relative;
+  color: white;
+  top: 20%;
+  left: 0%;
+  transform: translate(-30%, 0%);
+}
+.mainPage {
+  position: relative;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  background: linear-gradient(0.25turn, rgb(31, 44, 82), rgb(0, 0, 0), rgb(0, 0, 0), rgb(31, 44, 82));
+  /*background-size: cover;  */
+  /*background-position: center; */
+}
+.topBar {
+  position: relative;
+  top: -1%;
+  left: 0%;
+  width: 100%;
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  object-fit: center;
+  background-color: rgb(0, 0, 255);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  padding-top: 0px;
+  min-height: 40px;
+  max-height: 45px; 
+  background: linear-gradient(0.25turn, rgb(42, 51, 101), rgb(51, 62, 77), rgb(42, 51, 101));
+}
+.dropbtn {
+  background-color: rgb(13, 48, 109);
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  left: 20%;
+  width: 20%;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 250px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  width: 100%;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 0px;
+  font-size: 14px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown:hover .dropbtn {
+  background-color: rgb(23, 91, 155);
+}
+.dropdown-content a {
+  color: rgb(0, 0, 0);
+  background-color: rgb(0, 141, 196);
+}
+#intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  object-fit: center;
+  text-align: center;
+  font-size: 18px;
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+  top: 0%;
+  left: 0%;
+  width: 94%;
+  height: 100%;
+
+  border: 5px solid #03a9fc;
+}
+.firstPage {
+  position: relative;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+}
+.additionalPage {
+    position: relative;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+}
+#galleryContainer {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 40%;
+  overflow: hidden;
+  background-color: black;
+  border-radius: 5px;
+}
+#galleryContainer2 {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 40%;
+  overflow: hidden;
+  background-color: black;
+  border-radius: 5px;
+}
+#gallery {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  top: 0%;
+  left: 0%;
+  width: 250%;
+  height: 100%;
+  background-color: black;
+  overflow: hidden;
+  transform: translate(0%, 0%);
+  
+  /*border-radius: 10px;*/
+  object-fit: center;
+  gap: 1%;
+  
+}
+#gallery2 {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  top: 0%;
+  left: 0%;
+  width: 600%;
+  height: 100%;
+  background-color: black;
+  overflow: hidden;
+  transform: translate(0%, 0%);
+  /*border-radius: 10px;*/
+  object-fit: center;
+}
+#pageTwoTitle {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  height: 20%;
+  width: 20%;
+  
+  text-align: center;
+  font-size: 16;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.galleryItem {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 0%;
+  left: 0%;
+  width: 19%;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  overflow: hidden;
+  /*border: 1px solid white; /*delete this*/
+}
+/* Note: this is the div wrapper for the actual image*/
+.gallery_image {
+  position: relative;
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  overflow: hidden;
+}
+img {
+  height: 105%;
+
+  transform: translate(0%, 0%);
+}
+.galleryLink {
+  text-align: center;
+  position: center;
+}
+.galleryAnchor {
+  position: relative;
+  top: 10%;
+  left: 0%;
+  transform: translate(0%, 10%);
+}
+

@@ -9,4 +9,6 @@ src/handler/*
 !src/handler/__init__.py
 src/operator/*
 !src/handler/__init__.py
+!src/handler/algos.py
+!src/operator/forms.py
 
