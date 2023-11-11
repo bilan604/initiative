@@ -61,7 +61,7 @@ pip install --upgrade pip
 
 If you have multiple versions, make sure that the Python interpreter is using the right version of Python (ctrl+shift+p if you are using vscode).
 
-You can also specify the version of Python in git bash like ```python3.11 -m pip install beautifulsoup4```. If you do this, please not that each version of Python you have installed has its own version of pip!.
+You can also specify a specific version of Python if you have multiple versions of Python in git bash like ```python3.11 -m pip install beautifulsoup4```. If you do this, please not that each version of Python you have installed has its own version of pip!.
 ```
 python3.11 -m pip install --upgrade pip
 ```
