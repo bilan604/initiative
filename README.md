@@ -32,7 +32,7 @@ python main.py
 Running main.py locally automatically sets the environment variable DEVELOPMENT to true. The variable is used for console logs and is ONLY true when the app is run from the file "__main__.py".
 
 ## Troubleshooting  
-If you encounter any errors installing requirements from ```requirements.txt``` just use pip to install them mannually like ```pip install beautifulsoup4``.
+If you encounter any errors installing requirements from ```requirements.txt``` just use pip to install them mannually like ```pip install beautifulsoup4```.
 
 The above issue may be caused by not having a high enough version of Python. You can check your version using:
 ```
@@ -90,7 +90,7 @@ Returns the first page of urls for a search result.
         'id': '',
         'operation': 'get_search_result_urls',
         'request_data': json.dumps({
-            'query': '[string: the search query]',
+            'query': 'string: the search query',
         })
     }
 ```
@@ -105,8 +105,8 @@ Tries to get n urls for search results, for a maximum of n=100 urls.
         'id': '',
         'operation': 'get_n_search_results',
         'request_data': json.dumps({
-            'query': '[string: the search query]',
-            'n': [integer: desired number of results]
+            'query': 'string: the search query',
+            'n': integer: desired number of results
         })
     }
 ```
