@@ -77,15 +77,17 @@ print(use_api(pars))
 ![Implement your first API route!](https://github.com/bilan604/initiative/blob/main/static/use_api.png)  
 
 
-## Public functionalities for this project:  
-
-These endpoints don't require and id and are free to use (electricity not included). Feel free to try them out or continue using them, they're free because there's a rate limiter on operations.  
+## Private functionalities for this project:  
 
 #### Using Selenium and GPT-4 to answer questions online:
 
 https://github.com/bilan604/initiative/assets/77251582/d45149ed-a9df-414f-b8e8-03d1bca8f70b
 
-If you have questions about the details, just ask! Details are still up in the air - the endpoints for creating sessions and managing session buckets have been implemented on the development branch, but not pushed to production instance.
+Witness the browser answering it's own questions! If you have questions about the details, or want to use this endpoint as well, just ask :)
+
+## Public functionalities for this project:  
+
+These endpoints don't require and id and are free to use (electricity not included). Feel free to try them out or continue using them, they're free because there's a rate limiter on operations.  
 
 #### SERP API:
 
