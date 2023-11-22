@@ -81,6 +81,12 @@ print(use_api(pars))
 
 These endpoints don't require and id and are free to use (electricity not included). Feel free to try them out or continue using them, they're free because there's a rate limiter on operations.  
 
+#### Using Selenium and GPT-4 to answer questions online:
+
+https://github.com/bilan604/initiative/assets/77251582/d45149ed-a9df-414f-b8e8-03d1bca8f70b
+
+If you have questions about the details, just ask! Details are still up in the air - the endpoints for creating sessions and managing session buckets have been implemented on the development branch, but not pushed to production instance.
+
 #### SERP API:
 
 Returns the first page of urls for a search result.
