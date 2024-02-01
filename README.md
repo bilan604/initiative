@@ -1,12 +1,10 @@
 # Take Initiative! (API Documentation, Tutorial, and Template)
 @Author: Xing Yang Lan
 
-## Intro:
-I started this project because I realized that a lot of the code I was writting for unrelated personal projects, for fun, and for assigned projects were similar in nature, but not concrete enough or important enough to make a Github repository for. 
+## Introduction
+This project was constructed to aggregate any recurring generic functionalities that I would be implementing across various projects into a single API endpoint so that they wouldn't have to be coded each time. Placing the repetitive functionalities from different repositories together in a single repository, and assigned an atomic system to access each functionality in correspondence to the REST API post request parameters standard.
 
-Realizing that this could be overcome by placing the repetitive functionalities from different repositories together in a single repository, I decided to make an API and aggregate isolated functionalities from old projects into this single project, but instead of making seperate API routes for them, just giving each functionality a name for the operation that it performs.
-
-Now, the flask server (url below) hosts an API endpoint for me and my friends' projects - allowing functionalities to be accessed without git cloning or pip installations in remote environments.
+Now, the flask server (url below) hosts an API endpoint for me and/or my friends' projects - allowing functionalities to be accessed without git cloning or pip installations in remote environments.
 
 [Landing Page](http://bilan604.pythonanywhere.com)  
 
@@ -51,7 +49,7 @@ You can also specify a specific version of Python if you have multiple versions 
 python3.11 -m pip install --upgrade pip
 ```
 
-## Post Request Format  
+## POST Request Format  
 
 The /api/ endpoint takes an id, the desired functionality (similar to specifying 'Content-Type' in the headers for a post request, but for the route itself), and the request_data which is a json string containing the parameters for the function. (This is literally the chunk of code I copy to use it)
 
@@ -73,19 +71,11 @@ pars = {
 print(use_api(pars))
 ```
 
-#### Example: testing connection for application after running main.py  
+#### Example: Testing Connection for Your Application After Implementing an API Endpoint  
 ![Implement your first API route!](https://github.com/bilan604/initiative/blob/main/static/use_api.png)  
 
 
-## Private functionalities for this project:  
-
-#### Using Selenium and GPT-4 to answer questions online:
-
-https://github.com/bilan604/initiative/assets/77251582/d45149ed-a9df-414f-b8e8-03d1bca8f70b
-
-Witness the browser answering it's own questions! If you have questions about the details, or want to use this endpoint as well, just ask :)
-
-## Public functionalities for this project:  
+## Open Functionalities for This Project:  
 
 These endpoints don't require and id and are free to use (electricity not included). Feel free to try them out or continue using them, they're free because there's a rate limiter on operations.  
 
@@ -134,14 +124,4 @@ Good for selenium based projects.
     }
 ```
 response: a list of objects containing the question, html type of the question element of the question, and a list of the answer options (a list containing the label for the option and the element of the option) if present
-
-## TLDR: what is this project?  
-I made an API endpoint and am doing all my projects here but the code is not open source so I made a Flask API tutorial based off my project as an item to list in my project experiences. Also, free SERP API.
-
-## TLDR: should I git clone?  
-Looking for a fun/silly/challenging project to help you learn Python? Tired of circular dependencies? Hate refactoring and itching to refactor things? Want to access existing code without another git init or docker compose? Simply need a flask template to quickstart something you had in mind? Need a production backend with architecture that can scale functionalities like AWS scales services?
-
-If so, then this is the repo for you!
-
-Git clone this project and run main.py so that you can host your website AND/OR API endpoint, using a simple, intuitive, atomic, and most importantly, scalable backend architecture to give your code an API route!
 
