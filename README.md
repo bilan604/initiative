@@ -1,4 +1,4 @@
-# ProjectsAPI!
+# ProjectsAPI! (API Documentation, Tutorial, and Template)
 @Author: Xing Yang Lan
 
 ## Intro:
@@ -54,8 +54,7 @@ print(use_api_dev(pars))
 
 #### Search Results:
 
-Returns the first page of urls for a given search query.
-
+Getting the first page of urls for a given search query.
 ```
     pars = {
         'id': '',
@@ -65,9 +64,9 @@ Returns the first page of urls for a given search query.
         })
     }
 ```
-response: A message containing a list of search result urls
+returns: A list of search result url strings
 
-Returns the first n urls for a given search query.
+Getting the first `n` urls for a given search query.
 ```
     pars = {
         'id': '',
@@ -78,11 +77,43 @@ Returns the first n urls for a given search query.
         })
     }
 ```
-response: A message containing a list of n search result urls
+returns: A list of `n` search result url strings
 
-#### Automation
+Gets the response for a GPT-4 a query.
+```
+{"id": "bilan604",
+"operation": "ask_GPT4",
+"request_data": json.dumps({
+    'query': 'What is the capital of Argentina?'
+    })
+}
+```
+returns: GPT-4's response to the query as a string 
 
-I can use an endpoint (https://bilan604.pythonanywhere.com/apply/) to control a Selenium program that searches and answers questions online for me using GPT-4.
+Gets a list of websites that selling a given product
+```
+{"id": "bilan604",
+"operation": "get_product_urls",
+"request_data": json.dumps({
+    'product_description': 'Apple Airpods'
+    })
+```
+returns: a list of website url strings
+
+Gets the questions (input/multi-select/select/radio) on a webpage
+```
+{"id": "bilan604",
+"operation": "get_questions",
+"request_data": json.dumps({
+    'url': 'https://bilan604.pythonanywhere.com/login/'
+    })
+}
+```
+returns: a dictionary containing the question's label, outerHTML, and answer options
+
+#### Control Panels
+
+The endpoint (https://bilan604.pythonanywhere.com/apply/) is used to control a Selenium program that searches and answers questions online for me using GPT-4.
 
 https://github.com/bilan604/ProjectsAPI/assets/77251582/3a2d10cf-391c-4dd1-b380-9d3b06dd1e5a
 
