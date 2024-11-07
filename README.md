@@ -1,4 +1,4 @@
-# ProjectsAPI! (API Documentation, Tutorial, and Template)
+# ProjectsAPI!
 @Author: Xing Yang Lan
 
 ## Intro:
