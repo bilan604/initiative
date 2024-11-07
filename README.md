@@ -1,127 +1,89 @@
-# Take Initiative! (API Documentation, Tutorial, and Template)
+# ProjectsAPI! (API Documentation, Tutorial, and Template)
 @Author: Xing Yang Lan
 
-## Introduction
-This project was constructed to aggregate any recurring generic functionalities that I would be implementing across various projects into a single API endpoint so that they wouldn't have to be coded each time. Placing the repetitive functionalities from different repositories together in a single repository, and assigned an atomic system to access each functionality in correspondence to the REST API post request parameters standard.
+## Intro:
 
-Now, the flask server (url below) hosts an API endpoint for me and/or my friends' projects - allowing functionalities to be accessed without git cloning or pip installations in remote environments.
+[The Website](http://bilan604.pythonanywhere.com)  
 
-[Landing Page](http://bilan604.pythonanywhere.com)  
+The purpose of this project is to so that I can bundle code I've written across different sub-projects into one place, and then make post requests to the functionality by specifying both the functionality and the inputs required for that functionality. Hosting it online allows me to access code from different machines and by logging in to use the operator interface I can control programs in real time from my phone.
 
-NOTE: This repository isn't the actual repository for the url above. Since I added the code for most of the functionalities in the .gitignore, but wanted to make the repository public as well, I have changed this repository so that it is basically a flask tutorial to help people get into Python/Flask. (Its more exciting than learning for loops! :D)
-
-## Installation
-1. Navigate the folder that you want the project to be in.
-2. Git clone this repository and navigate to the folder.
+## Cloning
 ```
 git clone https://github.com/bilan604/initiative.git
 cd ./initiative
 ```
-3. Install the requirements
 ```
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
-
-## Running  
-Git Bash
 ```
 python main.py
 ```
-Running main.py locally automatically sets the environment variable DEVELOPMENT to true. The variable is used for console logs and is ONLY true when the app is run from the file "__main__.py".
 
-## Troubleshooting  
-If you encounter any errors installing requirements from ```requirements.txt``` just use pip to install them mannually like ```pip install beautifulsoup4```.
+## Post Request Format  
 
-The above issue may be caused by not having a high enough version of Python. You can check your version using:
-```
-python --version
-```
+The /api/ endpoint handles POST request that must contain the three parameters "id", "operation", and "request_data". The ID specifies the user, Operation specifies what functionality should be done, and request_data specifies the inputs for the functionality.
 
-Try upgrading pip:
+#### CURL:
 ```
-pip install --upgrade pip
+curl -X POST "https://bilan604.pythonanywhere.com/api/" \
+     -H "Content-Type: application/json" \
+     -d '{ "id": "bilan604", "operation": "get_search_result_urls", "request_data": {"query": "Fun things to do in Argentina"}}'
 ```
 
-If you have multiple versions, make sure that the Python interpreter is using the right version of Python (ctrl+shift+p if you are using vscode).
-
-You can also specify a specific version of Python if you have multiple versions of Python in git bash like ```python3.11 -m pip install beautifulsoup4``` . If you do this, please note that each version of Python you have installed has its own version of pip!.
-```
-python3.11 -m pip install --upgrade pip
-```
-
-## POST Request Format  
-
-The /api/ endpoint takes an id, the desired functionality (similar to specifying 'Content-Type' in the headers for a post request, but for the route itself), and the request_data which is a json string containing the parameters for the function. (This is literally the chunk of code I copy to use it)
-
+#### Python:
 ```
 import json
 import requests
 
-def use_api(pars: dict) -> list[dict]:
-    resp = requests.post(f'http://bilan604.pythonanywhere.com/api/', params=pars).text
+def use_api_dev(pars):
+    resp = requests.post(f'https://bilan604.pythonanywhere.com/api/', params=pars).text
     return json.loads(resp)["message"]
 
 pars = {
     "id": "bilan604",
     "operation": "get_search_result_urls",
     "request_data": json.dumps({
-        'query': 'What is the capital of Argentina?'
+        'query': 'Fun things to do in Argentina'
     })
 }
-print(use_api(pars))
+
+print(use_api_dev(pars))
 ```
 
-#### Example: Testing Connection for Your Application After Implementing an API Endpoint  
-![Implement your first API route!](https://github.com/bilan604/initiative/blob/main/static/use_api.png)  
+## Some Functionalities
 
+#### Search Results:
 
-## Open Functionalities for This Project:  
-
-These endpoints don't require and id and are free to use (electricity not included). Feel free to try them out or continue using them, they're free because there's a rate limiter on operations.  
-
-#### SERP API:
-
-Returns the first page of urls for a search result.
+Returns the first page of urls for a given search query.
 
 ```
     pars = {
         'id': '',
         'operation': 'get_search_result_urls',
         'request_data': json.dumps({
-            'query': 'string: the search query',
+            'query': '[string: the search query]',
         })
     }
 ```
 response: A message containing a list of search result urls
 
-#### SERP API Again:
-
-Tries to get n urls for search results, for a maximum of n=100 urls.
-
+Returns the first n urls for a given search query.
 ```
     pars = {
         'id': '',
         'operation': 'get_n_search_results',
         'request_data': json.dumps({
-            'query': 'string: the search query',
-            'n': integer: desired number of results
+            'query': '[string: the search query]',
+            'n': [integer: desired number of results]
         })
     }
 ```
 response: A message containing a list of n search result urls
 
-#### HTML User Input Element Scrapper:
+#### Automation
 
-Good for selenium based projects.
+I can an endpoint (https://bilan604.pythonanywhere.com/apply/) to control a Selenium program that searches and answers questions online for me using GPT-4.
 
-```
-    pars = {
-        "id": "",
-        "operation": "get_questions",
-        "request_data": json.dumps({
-            'url': url
-        })
-    }
-```
-response: a list of objects containing the question, html type of the question element of the question, and a list of the answer options (a list containing the label for the option and the element of the option) if present
+https://github.com/bilan604/ProjectsAPI/assets/77251582/3a2d10cf-391c-4dd1-b380-9d3b06dd1e5a
+
 
