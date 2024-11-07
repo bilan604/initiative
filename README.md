@@ -82,7 +82,7 @@ response: A message containing a list of n search result urls
 
 #### Automation
 
-I can an endpoint (https://bilan604.pythonanywhere.com/apply/) to control a Selenium program that searches and answers questions online for me using GPT-4.
+I can use an endpoint (https://bilan604.pythonanywhere.com/apply/) to control a Selenium program that searches and answers questions online for me using GPT-4.
 
 https://github.com/bilan604/ProjectsAPI/assets/77251582/3a2d10cf-391c-4dd1-b380-9d3b06dd1e5a
 
