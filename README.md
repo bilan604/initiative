@@ -113,7 +113,7 @@ returns: a dictionary containing the question's label, outerHTML, and answer opt
 
 #### Control Panels
 
-The endpoint (https://bilan604.pythonanywhere.com/apply/) is used to control a Selenium program that searches and answers questions online for me using GPT-4.
+The endpoint (https://bilan604.pythonanywhere.com/apply/) is used to control a Selenium program that searches for and answers questions online using GPT-4.
 
 https://github.com/bilan604/ProjectsAPI/assets/77251582/3a2d10cf-391c-4dd1-b380-9d3b06dd1e5a
 
