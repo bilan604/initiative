@@ -5,21 +5,32 @@ __pycache__/
 */__pycache__/
 */__pycache__/*
 
-src/generic/
-src/generic/db_files/*
-src/generic/api_files/
-src/generic/api_files/*
-src/generic/db_files/
-src/generic/db_files/*
-src/generic/private_files/
-src/generic/private_files/*
-
-src/handler/
+src/generic/*
 src/handler/*
 src/operator/*
-src/storage/*
+
+static/cert/
+static/cert/*
+static/images/
+static/images/*
+static/videos/
+static/videos/*
+
+templates/
+templates/*
+
+!src/generic/__init__.py
+!src/generic/chat.py
+!src/generic/sheets.py
+!src/generic/turtle.py
+!src/generic/trading.py
 
 !src/handler/__init__.py
-!src/handler/loader.py
-!src/operator/__init__.py
+!src/handler/algos.py
+!src/handler/parser.py
+!src/handler/sessions.py
+
+!src/operator/forms.py
+!src/operator/products.py
+!src/operator/searching.py
 

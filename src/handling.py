@@ -45,7 +45,7 @@ from src.generic.trading import get_btc_usd_price
 DEVELOPMENT = get_env_variable('DEVELOPMENT')
 TEXT_STORE_ACCESS_ID = get_access_id()
 TEXTS_STORED = {'1': 'The default text stored on initialization'}
-# can be refactored into datahandler
+
 if DEVELOPMENT == 'TRUE':
     DB_NAME = 'development.db'
 else:
