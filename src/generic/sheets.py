@@ -7,12 +7,11 @@ from googleapiclient.errors import HttpError
 from oauth2client.service_account import ServiceAccountCredentials
 
 
-def get_authorized_client(scope=[]):
+def get_authorized_client(scope=[], path='credentials.json'):
     if not scope:
         scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
-    # current working directory, get from credentials in console
-    filename = 'credentials.json'
+    filename = path
     creds = ServiceAccountCredentials.from_json_keyfile_name(filename, scope)
 
     # authorize the clientsheet
