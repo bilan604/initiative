@@ -22,7 +22,7 @@ The /api/ endpoint handles POST handles generic requests where different functio
 "request_data": "[a json string of the key word arguments]"
 ```
 
-#### Python:
+#### Python Example:
 ```
 import json
 import requests
@@ -41,12 +41,17 @@ pars = {
 
 print(post_request(pars))
 ```
+Returns```
+    {
+    'price': '100253.231',
+    'time': '2025-01-16T18:19:31+00:00'
+    }'''
 
-#### CURL:
+#### CURL Example:
 ```
 curl -X POST "https://bilan604.pythonanywhere.com/api/" \
      -H "Content-Type: application/json" \
-     -d '{ "id": "bilan604", "operation": "get_search_result_urls", "request_data": {"query": "Fun things to do in Argentina"}}'
+     -d '{ "id": "bilan604", "operation": "btc_price", "request_data": {"currency": "USD"}}'
 ```
 
 ## Forking the repo:  
@@ -62,5 +67,5 @@ python3 -m venv myenv
 source myenv/bin/activate
 ```
 
-3. Install the dependencies and run 'main.py'
+3. Install the dependencies and run main.py.  
 
