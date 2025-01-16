@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Authentication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(112, 214, 255);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .action-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            max-width: 400px;
+        }
+
+        .action-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-container input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .input-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .input-container button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message">
+            {{ message | safe }}
+        </div>
+        <div class="action-container">
+            <h2>Set Access Level of Another User</h2>
+            <div class="input-container">
+                <form method="POST" action="/admin" autocomplete="off">
+                    <input type="text" name="access_level_username" placeholder="access_level_username">
+                    <select name="access_level" id="access_level">
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="USER">USER</option>
+                        <option value="TESTER">TESTER</option>
+                      </select>
+                    <button type="submit" name="button_label" value="Set Access Level">Set Access Level</button>
+                </form>
+            </div>
+        </div>
+        <div class="action-container">
+            <h2>Set Credits</h2>
+            <div class="input-container">
+                <form method="POST" action="/admin" autocomplete="off">
+                    <input type="text" name="credits_username" placeholder="credits_username">
+                    <input type="number" name="credit_count" placeholder="Number of Credits">
+                    <br>
+                    <button type="submit" name="button_label" value="Set Credits">Set Credits</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

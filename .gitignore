@@ -1,19 +1,20 @@
 .env
-<<<<<<< HEAD
 
 __pycache__
 __pycache__/
 */__pycache__/
 */__pycache__/*
 
+src/generic/
+src/generic/db_files/*
+src/generic/api_files/
+src/generic/api_files/*
+src/generic/db_files/
+src/generic/db_files/*
+src/generic/private_files/
+src/generic/private_files/*
+
 src/handler/
-=======
-static/*.png
-
-__pycache__/
-*/__pycache__/
-
->>>>>>> 74fb4bb3b27f467174750e08cac12aba092d58f4
 src/handler/*
 src/operator/*
 src/storage/*

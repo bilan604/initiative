@@ -1,79 +1,120 @@
-# python-server
+# ProjectsAPI! (API Documentation, Tutorial, and Template)
+@Author: Xing Yang Lan
 
-A Python Flask Server and flask server template for aggregating parallel processes. By aggregating various functionalities into a backend which is hosted online, I can access my code accross devices, virtual envs, and repositories.  
+## Intro:
 
-Originally developed from the OpenAI quickstart tutorial, the updated ```flask_app.py``` and new ```handling.py``` files are an example / template backend python server demonstrating modular implementation of functionalities. By specifying the operation inside the request data, and the request data as well, a single function map allows for all requests to be handled in a single file, ```src/handling.py```, while the code for the functionalities can be added to a folder or file in src/operator or src/handler.
+[The Website](http://bilan604.pythonanywhere.com)  
 
-View Most recent build running:  
-[Website](http://bilan604.pythonanywhere.com)  
+The purpose of this project is to so that I can bundle code I've written across different sub-projects into one place, and then make post requests to the functionality by specifying both the functionality and the inputs required for that functionality. Hosting it online allows me to access code from different machines and by logging in to use the operator interface I can control programs in real time from my phone.
 
-View The (localhost) Quickstart Tutorial Template:
-[OpenAI Python Quickstart Tutorial](https://github.com/openai/openai-quickstart-python)
-
-## Requirements
-1. git bash
-2. python version 3.11
-
-## Running the Server:
-1. Navigate to where you want the folder to be and clone the repository.
+## Cloning
 ```
 git clone https://github.com/bilan604/initiative.git
+cd ./initiative
 ```
-
-2. Navigate to the folder
 ```
-cd initiative
+python -m pip install -r requirements.txt
 ```
-
-3. Install the requirements
-```
-pip install -r requirements.txt
-```
-
-4. Run main.py from git bash.
 ```
 python main.py
 ```
 
-## Troubleshooting  
-Check the python version
+## Post Request Format  
+
+The /api/ endpoint handles POST request that must contain the three parameters "id", "operation", and "request_data". The ID specifies the user, Operation specifies what functionality should be done, and request_data specifies the inputs for the functionality.
+
+#### CURL:
 ```
-python --version
+curl -X POST "https://bilan604.pythonanywhere.com/api/" \
+     -H "Content-Type: application/json" \
+     -d '{ "id": "bilan604", "operation": "get_search_result_urls", "request_data": {"query": "Fun things to do in Argentina"}}'
 ```
 
-Upgrade pip. Older versions of packages can cause code to behave unexpectedly without warning.
+#### Python:
 ```
-pip install --upgrade pip
-```
-
-## Calling the API
-```
-# No id has to be specified to request the API as of now
 import json
 import requests
 
-def ping_autoauto():
-    
-    URL = 'http://bilan604.pythonanywhere.com/api/'
-    pars = {
-        'id': '',
-        'operation': 'prompt_autoauto',
-        'request_data': json.dumps({
-            'query': 'Ping'
-        })
-    }
+def use_api_dev(pars):
+    resp = requests.post(f'https://bilan604.pythonanywhere.com/api/', params=pars).text
+    return json.loads(resp)["message"]
 
-    resp = requests.post(URL, params=pars)
-    print(resp.text)
-    return resp.text  # remember to json.loads()! :)
+pars = {
+    "id": "bilan604",
+    "operation": "get_search_result_urls",
+    "request_data": json.dumps({
+        'query': 'Fun things to do in Argentina'
+    })
+}
 
-ping_autoauto()
+print(use_api_dev(pars))
 ```
 
-## Operations
+## Some Functionalities
 
-Not all are going to be listed, because this is more of a personal API, but here are two of the more helpful ones.
+#### Search Results:
 
-1. prompt_autoauto: Prompts autoauto, like on the landing page . request_data takes ```query```. 
-2. get_search_result_urls: Gets the urls from Google search results for a query. request_data takes ```query```. 
+Getting the first page of urls for a given search query.
+```
+    pars = {
+        'id': '',
+        'operation': 'get_search_result_urls',
+        'request_data': json.dumps({
+            'query': '[string: the search query]',
+        })
+    }
+```
+returns: A list of search result url strings
+
+Getting the first `n` urls for a given search query.
+```
+    pars = {
+        'id': '',
+        'operation': 'get_n_search_results',
+        'request_data': json.dumps({
+            'query': '[string: the search query]',
+            'n': [integer: desired number of results]
+        })
+    }
+```
+returns: A list of `n` search result url strings
+
+Gets the response for a GPT-4 a query.
+```
+{"id": "bilan604",
+"operation": "ask_GPT4",
+"request_data": json.dumps({
+    'query': 'What is the capital of Argentina?'
+    })
+}
+```
+returns: GPT-4's response to the query as a string 
+
+Gets a list of websites that selling a given product
+```
+{"id": "bilan604",
+"operation": "get_product_urls",
+"request_data": json.dumps({
+    'product_description': 'Apple Airpods'
+    })
+```
+returns: a list of website url strings
+
+Gets the questions (input/multi-select/select/radio) on a webpage
+```
+{"id": "bilan604",
+"operation": "get_questions",
+"request_data": json.dumps({
+    'url': 'https://bilan604.pythonanywhere.com/login/'
+    })
+}
+```
+returns: a dictionary containing the question's label, outerHTML, and answer options
+
+#### Control Panels
+
+The endpoint (https://bilan604.pythonanywhere.com/apply/) is used to control a Selenium program that searches for and answers questions online using GPT-4.
+
+https://github.com/bilan604/ProjectsAPI/assets/77251582/3a2d10cf-391c-4dd1-b380-9d3b06dd1e5a
+
 

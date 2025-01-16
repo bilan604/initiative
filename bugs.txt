@@ -1,0 +1,18 @@
+main-functionality-test REPO ISSUES:
+
+-Early "notLan32 has not been connected yet" when booting AutoLinkedInEasyApply (minor)
+
+
+-type=“text” inputs requiring numerical inputs, numerical boolean not triggering in askLLM
+-maybe check page after answering questions and see which questions have red err messages?
+
+1. cut to_apply.txt down to 1200 entries, but don't remove the last 50.
+2. Stop printing the entire operations list. just the operations[i][“operation”] and id
+3. consider -
+```
+if self.driver.current_url() != "https://www.linkedin.com/feed/":
+	wait_input = input("_______________Login Completed?_______________")
+```
+but this is very extra...
+4. Add a button for clearning the to-apply section. (over-the-top)
+
