@@ -17,7 +17,7 @@ Some features of ProjectsAPI:
 
 The /api/ endpoint handles POST handles generic requests where different functionalities by taking:
 ```
-"id": "[An optional identifier]"
+"id": "[an optional identifier]"
 "operation": "[name of operation]"
 "request_data": "[a json string of the key word arguments]"
 ```
