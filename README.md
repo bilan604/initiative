@@ -1,27 +1,46 @@
 # ProjectsAPI! (API Documentation, Tutorial, and Template)
 @Author: Xing Yang Lan
 
-## Intro:
+## About:
 
-[The Website](http://bilan604.pythonanywhere.com)  
+This is the original repo for making a server & database to handle backend post requests as well as front-end navigation panels to monitor and control processes. 
 
-The purpose of this project is to so that I can bundle code I've written across different sub-projects into one place, and then make post requests to the functionality by specifying both the functionality and the inputs required for that functionality. Hosting it online allows me to access code from different machines and by logging in to use the operator interface I can control programs in real time from my phone.
+For example, here is an instance of the server that I am hosting [link to server](http://bilan604.pythonanywhere.com) (Private Repository)
 
-## Cloning
+Some features of ProjectsAPI:  
+1. Improves modularity by aggregating code from different projects.  
+2. Increases the accessibility of code (i.e. Allowing headless VM instances to make post requests for updates).  
+3. Allows headless VM instances to make updates via post requests to the website.  
+4. Act as a control panel for active bots.  
+
+## Examples:  
+
+The /api/ endpoint handles POST handles generic requests where different functionalities by taking:
 ```
-git clone https://github.com/bilan604/initiative.git
-cd ./initiative
-```
-```
-python -m pip install -r requirements.txt
-```
-```
-python main.py
+"id": "[An optional identifier]"
+"operation": "[name of operation]"
+"request_data": "[a json string of the key word arguments]"
 ```
 
-## Post Request Format  
+#### Python:
+```
+import json
+import requests
 
-The /api/ endpoint handles POST request that must contain the three parameters "id", "operation", and "request_data". The ID specifies the user, Operation specifies what functionality should be done, and request_data specifies the inputs for the functionality.
+def post_request(pars):
+    resp = requests.post(f'https://bilan604.pythonanywhere.com/api/', params=pars).text
+    return json.loads(resp)["message"]
+
+pars = {
+    "id": "bilan604",
+    "operation": "btc_price",
+    "request_data": json.dumps({
+        "currency": "USD"
+    })
+}
+
+print(post_request(pars))
+```
 
 #### CURL:
 ```
@@ -30,84 +49,18 @@ curl -X POST "https://bilan604.pythonanywhere.com/api/" \
      -d '{ "id": "bilan604", "operation": "get_search_result_urls", "request_data": {"query": "Fun things to do in Argentina"}}'
 ```
 
-#### Python:
+## Forking the repo:  
+1. Clone the project
 ```
-import json
-import requests
-
-def use_api_dev(pars):
-    resp = requests.post(f'https://bilan604.pythonanywhere.com/api/', params=pars).text
-    return json.loads(resp)["message"]
-
-pars = {
-    "id": "bilan604",
-    "operation": "get_search_result_urls",
-    "request_data": json.dumps({
-        'query': 'Fun things to do in Argentina'
-    })
-}
-
-print(use_api_dev(pars))
+git clone https://github.com/bilan604/initiative.git
+cd ./initiative
 ```
 
-## Some Functionalities
+2. Create and enter a virtual environment
+```
+python3 -m venv myenv
+source myenv/bin/activate
+```
 
-#### Search Results:
-
-Getting the first page of urls for a given search query.
-```
-    pars = {
-        'id': '',
-        'operation': 'get_search_result_urls',
-        'request_data': json.dumps({
-            'query': '[string: the search query]',
-        })
-    }
-```
-returns: A list of search result url strings
-
-Getting the first `n` urls for a given search query.
-```
-    pars = {
-        'id': '',
-        'operation': 'get_n_search_results',
-        'request_data': json.dumps({
-            'query': '[string: the search query]',
-            'n': [integer: desired number of results]
-        })
-    }
-```
-returns: A list of `n` search result url strings
-
-Gets the response for a GPT-4 a query.
-```
-{"id": "bilan604",
-"operation": "ask_GPT4",
-"request_data": json.dumps({
-    'query': 'What is the capital of Argentina?'
-    })
-}
-```
-returns: GPT-4's response to the query as a string 
-
-Gets a list of websites that selling a given product
-```
-{"id": "bilan604",
-"operation": "get_product_urls",
-"request_data": json.dumps({
-    'product_description': 'Apple Airpods'
-    })
-```
-returns: a list of website url strings
-
-Gets the questions (input/multi-select/select/radio) on a webpage
-```
-{"id": "bilan604",
-"operation": "get_questions",
-"request_data": json.dumps({
-    'url': 'https://bilan604.pythonanywhere.com/login/'
-    })
-}
-```
-returns: a dictionary containing the question's label, outerHTML, and answer options
+3. Install the dependencies and run 'main.py'
 
