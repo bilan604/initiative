@@ -1,9 +1,6 @@
 import re
 from bs4 import BeautifulSoup
-from src.generic.loader import get_env_variable
 
-
-DEVELOPMENT = get_env_variable('DEVELOPMENT')
 
 def getText(e: str):
     # This removes everything inside an opening and closing tag
@@ -19,7 +16,6 @@ def getText(e: str):
             stack.append("<")  # arbituray letter
         elif e[i] == ">":
             if not stack:
-                if DEVELOPMENT == 'TRUE': print("the HTML code has uneven opening and closing elements")
                 return ""
             stack.pop()
         else:
@@ -67,10 +63,7 @@ def getOpeningTag(element):
     return element[:idx+1]
 
 def getProperties(tag: str):
-    # 09/01/2023: version
-    # fix href url values &amp; => & and = sign causing multiple hrefs (= signs nested inside the value)
     if not tag:
-        if DEVELOPMENT == 'TRUE': print("get_properties(): empty tag")
         return {}
     
     if getOpeningTag(tag) != tag:
@@ -132,7 +125,6 @@ def getQuestion(text, divs):
 def get_xpath_by_element(element):
     # returns a chrome selenium xpath
     if not element:
-        if DEVELOPMENT == 'TRUE': print("get_xpath_by_element(): empty element")
         return None
     element_type = element[1: element.find(" ")]
     opening_tag = getOpeningTag(element)
@@ -307,7 +299,6 @@ def getTags(s):
                 indiv.append("<")
             elif s[i] == ">":
                 if not indiv:
-                    if DEVELOPMENT == 'TRUE': print("Balance error")
                     continue
                 indiv.pop()
                 if not indiv:
@@ -330,7 +321,6 @@ def getTags(s):
     # time will tell if this is an issue
     tags2 = getTags2(s)  # getTags2 checks for nested <
     if tags1 != tags2:
-        if DEVELOPMENT == 'TRUE': print("NOTE: tags1 != tags2, there was a < nesting discrepancy in the element")
         return tags2
     return tags2
 

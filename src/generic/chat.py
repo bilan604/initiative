@@ -4,11 +4,6 @@ import json
 import pandas as pd
 from datetime import datetime
 
-from src.generic.loader import get_env_variable
-
-
-DEVELOPMENT = get_env_variable('DEVELOPMENT')
-
 
 class __MessageHandler:
     # Issues with multiple instances of message handler or some shit...
@@ -41,9 +36,6 @@ class __MessageHandler:
             return []
         chat_messages = self.chats[ip]
         chat_messages = [re.sub("\n", "<br>", message) for message in chat_messages]
-        if DEVELOPMENT == 'TRUE': print("\n----------------------->")
-        if DEVELOPMENT == 'TRUE': print("self.chats:")
-        if DEVELOPMENT == 'TRUE': print(self.chats)
         return chat_messages
 
     def get_chat(self, ip: str) -> list[str]:
@@ -53,9 +45,6 @@ class __MessageHandler:
         if ip not in self.chats:
             return []
         chat_messages = self.chats[ip]
-        if DEVELOPMENT == 'TRUE': print("\n----------------------->")
-        if DEVELOPMENT == 'TRUE': print("self.chats:")
-        if DEVELOPMENT == 'TRUE': print(self.chats)
         return chat_messages
     
     def create_empty_chat(self, ip: str):
@@ -152,7 +141,6 @@ class MessageHandler:
 
     def get_nonhtml_chat(self, ip: str) -> list[str]:
         if self.get_seconds_since_last_message(ip) > 7200:
-            if DEVELOPMENT == 'TRUE': print("CLEARING CHAT")
             self.clear_chat(ip)
             return []
         df = self.read_csv("chat_messages.csv")

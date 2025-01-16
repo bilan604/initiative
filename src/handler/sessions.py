@@ -3,12 +3,9 @@ import json
 import pandas as pd
 
 from src.generic.encryption_manager import EncryptionManager
-from src.generic.loader import get_env_variable
 
 from src.generic.user import get_user_by_username
 
-
-DEVELOPMENT = get_env_variable('DEVELOPMENT')
 
 EM = EncryptionManager()
 
@@ -47,8 +44,7 @@ class USS(object):
     def __init__(self, DB_NAME):
         self.DB_NAME = DB_NAME
         self.cwd = os.getcwd()
-        ###############
-        self.path = ['src', 'generic', 'private_files'] #['src', 'generic', 'private_files']  ################
+        self.path = ['src', 'generic', 'private_files']
         self.separator = '\\'
         if "/" in os.getcwd():
             self.separator = "/"
@@ -90,7 +86,6 @@ class USS(object):
     def __read_csv(self, path):
         df = pd.read_csv(path)
         if "Unnamed: 0" in df.columns:
-            if DEVELOPMENT == 'TRUE': print("\n!!!!!!!!!!!!!!!!!!!\nDATA INTEGRITY ERROR:\nUNNAMED: 0 in df.columns")
             df = df.drop(columns=["Unnamed: 0"])
         return df
     
@@ -139,9 +134,6 @@ class USS(object):
         return mtx
 
     def initialize(self):
-        self.cwd
-        if DEVELOPMENT == 'TRUE': print("self.cwd:---->")
-        if DEVELOPMENT == 'TRUE': print(self.cwd)
         if '\\' not in self.cwd:
             self.separator = '/'
         prefix = self.get_prefix()
@@ -162,7 +154,6 @@ class USS(object):
     def save_dict(self, file_name, dd):
         df = pd.DataFrame(dd)
         file_path = self.get_file_path(file_name)
-        if DEVELOPMENT == 'TRUE': print("save_dict() file path:", file_path)
         df.to_csv(file_path, index=False)
     
     def load_users(self):
@@ -274,8 +265,6 @@ def __view_sessions():
     SESSIONS = uss.load_sessions()
     SERVICE_WORKERS = uss.load_service_workers()
     
-    if DEVELOPMENT == 'TRUE': print("__view_sessions() breakpoint for viewing here")
-
 def endpoint_add_service_worker(name):
     uss = USS('session')
     USERS = uss.load_users()

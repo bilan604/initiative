@@ -3,10 +3,6 @@ import requests
 from bs4 import BeautifulSoup
 from collections import Counter
 from src.handler.parser import *
-from src.generic.loader import get_env_variable
-
-
-DEVELOPMENT = get_env_variable('DEVELOPMENT')
 
 
 def prompt_auto_auto(query):
@@ -56,7 +52,6 @@ def google_search_pages(query: str, n: int) -> list[int]:
         return []
     if n >= 100:
         n = 100
-        if DEVELOPMENT == 'TRUE': print(f">>>>>>>>google_search_pages(): setting n={n} to 100")
     vis = {}
     # assuming 12 per page...
     for start in range(0, n * (30 // 10) + 1, 20):
@@ -101,7 +96,4 @@ def test_queries():
         urls = google_search_pages(q, 20)
         if len(urls) >= 20:
             s += 1
-        if DEVELOPMENT == 'TRUE': print(len(urls))
-    
-    if DEVELOPMENT == 'TRUE': print(f"Coverage: {s/len(search_queries)}")
 

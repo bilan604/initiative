@@ -5,33 +5,28 @@ from flask import Flask
 from flask import session, request
 from flask import redirect, render_template, url_for
 
-from src.generic.loader import get_env_variable
-from src.generic.loader import get_access_id
-from src.generic.private_handler import runtime_environment_check
-from src.generic.private_handler import get_job_applications
-
 from src.generic.turtle import Turtle
 from src.generic.encryption_manager import EncryptionManager
 from src.generic.chat import MessageHandler
 
-from src.generic.user import register as user_register
-from src.generic.user import login as user_login
-from src.generic.user import logout as user_logout
-from src.generic.user import get_user_by_uuid
-from src.generic.user import update_user_info
-from src.generic.user import change_user_access_level
-from src.generic.user import change_user_number_of_credits
+from src.generic.private_handler import runtime_environment_check
+from src.generic.private_handler import get_job_applications
 
-from src.handler.router import add_routes  # adds 
-from src.handler.requester import chatGPT35
-
+from src.handler.router import add_routes
 from src.handler.sessions import get_operations_by_worker_id
 from src.handler.sessions import  get_available_service_workers
 
-# hanlding.py handles more handle-needing functions along with their args kwargs
-# its basically an extra layer where functions are imported into the handler
-# and wrapped around an error handling function taking (id, data) before being
-# imported again here
+from src.generic.user import get_user_by_uuid
+from src.generic.user import update_user_info
+from src.generic.user import user_register
+from src.generic.user import user_login
+from src.generic.user import user_logout
+
+from src.generic.image_extraction import extract_text_from_image
+from src.generic.image_extraction import get_data_from_extracted_text
+
+from src.handler.sheets_orders import update_sheet_with_data
+
 from src.handling import test
 from src.handling import get
 from src.handling import google_search
@@ -40,17 +35,9 @@ from src.handling import get_search_result_urls
 from src.handling import prompt_autoauto
 from src.handling import ask_openai
 from src.handling import ask_GPT35, ask_GPT4
-from src.handling import get_notefinder
-from src.handling import add_notefinder
-from src.handling import update_notefinder
-from src.handling import create_notefinder
-from src.handling import load_notefinder
-from src.handling import query_notefinder
-from src.handling import update_access
 from src.handling import get_questions
 from src.handling import get_product_url
 from src.handling import get_product_urls
-
 from src.handling import add_service_worker
 from src.handling import remove_service_worker
 from src.handling import create_session
@@ -63,20 +50,10 @@ from src.handling import btc_price
 from src.handling import btc_usd_price
 
 
-# These next two lines of imports should ideally pass through hsrc.anding
-from src.generic.image_extraction import extract_text_from_image, get_data_from_extracted_text
-from src.handler.sheets_orders import update_sheet_with_data
-
-
-# DEVELOPMENT used to be a bool in .env but now is determined by the url after app runs
-DEVELOPMENT = get_env_variable('DEVELOPMENT')
-
-MESSAGE_HANDLER = MessageHandler(DEVELOPMENT)
-
+MESSAGE_HANDLER = MessageHandler('TRUE')
 
 app = Flask(__name__)
 
-app.secret_key = get_env_variable("APP_SECRET_KEY")
 app.config['SESSION_COOKIE_SECURE'] = False
 
 # Define the upload folder (where uploaded screenshots will be stored)
@@ -111,21 +88,10 @@ operationFunctionsMap = {
 
     "get_questions": get_questions,
 
-    "get_notefinder": get_notefinder,
-    "add_notefinder": add_notefinder,
-    "update_notefinder": update_notefinder,
-    "create_notefinder": create_notefinder,
-    "load_notefinder": load_notefinder,
-    "query_notefinder": query_notefinder,
-    "update_access": update_access,
-
-    # Adds a row to a google sheet
+    # Format:
     # data{sheet_name: str, data: dict}
     "add_row_to_sheet": add_row_to_sheet,
     
-    # data{prompt: str}
-    #"generate_image": generate_image,
-
     "get_product_url": get_product_url,
     "get_product_urls": get_product_urls,
 
@@ -159,7 +125,7 @@ def handle_request_params(id, operation, request_data):
 
     if not turtle.canOperate(operation):
         rem = turtle.getRemaining(operation)
-        return "Cooldown: "+ str(rem) + " seconds remaining"
+        return "Cooldown: " + str(rem) + " seconds remaining"
     
     if operation not in operationFunctionsMap:
         return "operation not in operationFunctionsMap"
@@ -198,10 +164,6 @@ def handle(request):
             return "Parameter: 'request_data' not specified"
         request_data = json.loads(request_data)
 
-    if DEVELOPMENT == 'TRUE': print("id:", id)
-    if DEVELOPMENT == 'TRUE': print("operation:", operation)
-    if DEVELOPMENT == 'TRUE': print("request_data:", request_data)
-
     resp = handle_request_params(id, operation, request_data)
 
     # update the turtle!
@@ -209,112 +171,10 @@ def handle(request):
     
     return resp
 
-
-@app.route("/admin/", methods=["GET", "POST"])
-def admin():
-    # First, check whether they can access the page.
-    curr_uuid = session.get("uuid", -1)
-    if curr_uuid == -1:
-        return render_template('navigate.html', message="Please login as admin to access the admin panel.")
-    user = get_user_by_uuid(curr_uuid)
-    if user == None:
-        return render_template('navigate.html', message="Could not find user for this session. Please login again as admin to access the admin panel.")
-    
-    access_level = user.user_info["ACCOUNT_TYPE"]
-    if access_level != "ADMIN":
-        return render_template('navigate.html', message="Please login as admin to access the admin panel.")
-
-    # Handle get and post requests.
-    if request.method == "GET":
-        return render_template('admin.html', message="You are logged in as ADMIN.")
-    elif request.method == "POST":
-        button_label = request.form['button_label']
-        
-        if button_label == "Set Access Level":
-            access_level_username = request.form['access_level_username']
-            access_level = request.form['access_level']
-            if user.username == access_level_username:
-                message = "You can not change your own access level."
-            else:
-                message = change_user_access_level(access_level_username, access_level)
-            return render_template('admin.html', message=message)
-        
-        elif button_label == "Set Credits":
-            credits_username = request.form['credits_username']
-            credit_count = request.form['credit_count']
-            if type(credit_count) == str:
-                try:
-                    credit_count = int(credit_count)
-                except:
-                    return render_template('admin.html', message="Invalid Credit Count Input Provided.")
-            
-            # Too many credits who tf is trying to do this?
-            if credit_count  > 1_000_000:
-                return render_template('admin.html', message="Changing credit count to such is not yet implemented.")
-            
-            message = change_user_number_of_credits(credits_username, credit_count)
-        
-            return render_template('admin.html', message=message)
-    else:
-        return "Request Method Not Supported"
-
-@app.route("/messages/", methods=["POST"])
-def messages():
-    global MESSAGE_HANDLER
-    user_input = request.form.get('input', "")
-    curr_uuid = session.get("uuid", -1)
-    if curr_uuid == -1:
-        if DEVELOPMENT == 'TRUE': print("Current uuid was -1")
-
-    if user_input == "":
-        is_first_load = request.form.get('isFirstLoad', "")
-        uuid_key = str(curr_uuid)    
-        if is_first_load == "TRUE":
-            existing_messages = MESSAGE_HANDLER.get_chat(uuid_key)
-            if existing_messages:
-                return json.dumps(existing_messages)
-            else:
-                MESSAGE_HANDLER.create_empty_chat(uuid_key)
-                return json.dumps(MESSAGE_HANDLER.get_chat(uuid_key))
-        else:
-            # accidental spaces should be handled in the chat class
-            MESSAGE_HANDLER.create_empty_chat(uuid_key)
-            return json.dumps(MESSAGE_HANDLER.get_chat(uuid_key))
-
-    else:
-        # add user message to chat so that it is included in the context window when calling chatGPT35
-        uuid_key = str(curr_uuid)
-        MESSAGE_HANDLER.add_chat_message(uuid_key, user_input)
-
-        messages = MESSAGE_HANDLER.get_nonhtml_chat(uuid_key)
-        ai_response = chatGPT35(messages)
-
-        MESSAGE_HANDLER.add_chat_message(uuid_key, ai_response)
-        #Hi, was it Adam or Eve that bit the apple in the Bible?
-        page_messages = MESSAGE_HANDLER.get_chat(uuid_key)
-        return json.dumps(page_messages)
-
-@app.route("/chat/", methods=["GET", "POST"])
-def chat():
-    global MESSAGE_HANDLER
-    if request.method == "GET":
-        curr_uuid = session.get("uuid", -1)
-        if curr_uuid == -1:
-            #session['uuid'] = uuid.uuid4()
-            return "Please Login first."
-            
-        return render_template("chat.html")
-    
-    
-    if DEVELOPMENT == 'TRUE': print("Code should not have reached here!")
-    return json.dumps(["Error, wrong type of request was made"])
-
 @app.route("/navigate/", methods=["GET"])
 def navigate():
     if request.method == "POST":
         nav_to = request.form['nav_to']
-        if DEVELOPMENT == 'TRUE': print("-----> NAV TO ACTUALLY TRIGGERS?")
-        if DEVELOPMENT == 'TRUE': print("nav_to:", nav_to)
         if nav_to:
             if "navigate" in nav_to:
                 return redirect(f"/{nav_to}", message= "plc")
@@ -340,7 +200,6 @@ def navigate():
                 if str(app[3]) != "nan" and str(app[4]) != "nan":
                     application_entry = app[4] + ": " + app[3]
                     applications.append(application_entry)
-            if DEVELOPMENT == 'TRUE': print("applications:", applications)
             
             if recently_applied_jobs and not message_set:
                 message = "Recently Appliced to Jobs:\n" + \
@@ -375,8 +234,6 @@ def update():
             return "Please login."
             
         user = get_user_by_uuid(curr_uuid)
-        if DEVELOPMENT == 'TRUE': print("IF USER NOT NONE THEN OK!\n--------->\n")
-        if DEVELOPMENT == 'TRUE': print(user)
         return render_template('update.html')
     
 
@@ -443,7 +300,6 @@ def applications():
     else:
         return "Request method not supported."
 
-
 @app.route("/apply/", methods=["GET", "POST"])
 def apply():
     if request.method == "GET":
@@ -458,15 +314,12 @@ def apply():
                 return ''
             return sw_names[0]
 
-
         # 2. handle post requests from users
         curr_uuid = session.get("uuid", -1)
-        if DEVELOPMENT == 'TRUE': print("\nAPPLY CURR_UUID:", curr_uuid)
         if curr_uuid == -1:
             return render_template("navigate.html", message="Please login first.")
         
         user = get_user_by_uuid(curr_uuid)
-        if DEVELOPMENT == 'TRUE': print("apply() user_by_ip() user:", user)
         if user == None:
             return render_template("navigate.html", message="Please login first.")
         
@@ -490,10 +343,6 @@ def apply():
             ADDRESS = user.user_info['ADDRESS']
             SCHOOLS = user.user_info['SCHOOLS']
             RESUME = user.user_info['RESUME']
-            if DEVELOPMENT == 'TRUE': print(LINKEDIN_USERNAME)
-            if DEVELOPMENT == 'TRUE': print(ADDRESS)
-            if DEVELOPMENT == 'TRUE': print(SCHOOLS)
-            if DEVELOPMENT == 'TRUE': print(RESUME)
             user.user_info["SERVICE_WORKER"] = service_worker
             from src.generic.user import DATAHANDLER
             DATAHANDLER.update_user(user)
@@ -542,9 +391,6 @@ def apply():
             search_term = request.form["search_term"]
             location = request.form["location"]
             pages = int(request.form["pages"])
-            if DEVELOPMENT == 'TRUE': print(search_term)
-            if DEVELOPMENT == 'TRUE': print(location)
-            if DEVELOPMENT == 'TRUE': print(pages)
             data_load = {
                 'worker_id': user.user_info["SERVICE_WORKER"],
                 'session_operation': 'session_load',
@@ -557,9 +403,7 @@ def apply():
                 'session_operation': 'session_apply'
             }
             resp_load = add_operation(user.username, data_load)
-            if DEVELOPMENT == 'TRUE': print("resp_load:", resp_load)
             resp_apply = add_operation(user.username, data_apply)
-            if DEVELOPMENT == 'TRUE': print("resp_apply:", resp_apply)
             return render_template("navigate.html", message=resp_apply)
         return render_template('apply.html')  
     return "Request method not supported"
@@ -623,9 +467,6 @@ def sessions(worker_id):
 
 @app.route("/api/", methods=("GET", "POST"))
 def api():
-    if DEVELOPMENT:
-        if DEVELOPMENT == 'TRUE': print("/api/ route called:")
-
     if request.method == "GET":
         return json.dumps({
             "message": "The format for a get response from API"
@@ -682,17 +523,9 @@ def upload_file():
 
 @app.route("/", methods=("GET", "POST"))
 def hello_world():
-    global DEVELOPMENT
-    if '127.0.0' in request.host_url:
-        DEVELOPMENT = 'True'
-    else:
-        DEVELOPMENT = 'False'
-    print("DEVELOPMENT variable set to " + DEVELOPMENT)
-
     response = ""
     if request.method == "POST":
         query = request.form['query']
-        if DEVELOPMENT == 'TRUE': print("Query: ", query)
         if query and len(query) > 0:
             response = handle_request_params('', 'prompt_autoauto', {
                 "query": query
