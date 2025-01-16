@@ -9,14 +9,7 @@ src/generic/*
 src/handler/*
 src/operator/*
 
-static/cert/
-static/cert/*
-static/images/
-static/images/*
-static/videos/
-static/videos/*
-static/
-static/*
+/static
 
 templates/
 templates/*

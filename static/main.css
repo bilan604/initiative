@@ -1,8 +1,0 @@
-
-img {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  object-fit: fill;
-  transform: translate(-50%, 0%);
-}
