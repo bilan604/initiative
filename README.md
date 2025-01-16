@@ -5,7 +5,7 @@
 
 This is the original repo for making a server & database to handle backend post requests as well as front-end navigation panels to monitor and control processes. 
 
-For example, here is an instance of the server that I am hosting [link to server](http://bilan604.pythonanywhere.com) (Private Repository)
+For example, here is an instance of the server that I am hosting [link to server](http://bilan604.pythonanywhere.com) (Seperate Repository)
 
 Some features of ProjectsAPI:  
 1. Improves modularity by aggregating code from different projects.  
