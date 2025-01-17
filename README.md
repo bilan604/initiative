@@ -15,7 +15,7 @@ Some features of ProjectsAPI:
 
 ![PythonAnywhere Image](https://raw.githubusercontent.com/bilan604/initiative/main/assets/pythonanywhere.png)
 
-## Examples:  
+## Examples:
 
 The /api/ endpoint handles POST handles generic requests where different functionalities by taking:
 ```
@@ -43,13 +43,14 @@ pars = {
 
 print(post_request(pars))
 ```
+
 response:
 ```
     {
     'price': '100253.231',
     'time': '2025-01-16T18:19:31+00:00'
     }
-'''
+```
 
 #### CURL Example:
 ```
