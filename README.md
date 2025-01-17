@@ -1,4 +1,4 @@
-# ProjectsAPI! (API Documentation, Tutorial, and Template)
+# ProjectsAPI!  
 @Author: Xing Yang Lan
 
 ## About:
@@ -12,6 +12,8 @@ Some features of ProjectsAPI:
 2. Increases the accessibility of code (i.e. Allowing headless VM instances to make post requests for updates).  
 3. Allows headless VM instances to make updates via post requests to the website.  
 4. Act as a control panel for active bots.  
+
+https://github.com/bilan604/initiative/blob/main/assets/pythonanywhere.png
 
 ## Examples:  
 
