@@ -43,11 +43,13 @@ pars = {
 
 print(post_request(pars))
 ```
-Returns```
+response:
+```
     {
     'price': '100253.231',
     'time': '2025-01-16T18:19:31+00:00'
-    }'''
+    }
+'''
 
 #### CURL Example:
 ```
