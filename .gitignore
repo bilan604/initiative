@@ -10,8 +10,6 @@ src/generic/*
 src/handler/*
 src/operator/*
 
-/static
-
 templates/
 templates/*
 
@@ -29,4 +27,3 @@ templates/*
 !src/operator/forms.py
 !src/operator/products.py
 !src/operator/searching.py
-
