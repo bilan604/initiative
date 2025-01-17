@@ -58,6 +58,14 @@ curl -X POST "https://bilan604.pythonanywhere.com/api/" \
      -d '{ "id": "bilan604", "operation": "btc_price", "request_data": {"currency": "USD"}}'
 ```
 
+#### CURL:
+```
+curl -X POST "https://bilan604.pythonanywhere.com/api/" \
+     -H "Content-Type: application/json" \
+     -d '{ "id": "bilan604", "operation": "get_search_result_urls", "request_data": {"query": "Fun things to do in Argentina"}}'
+```
+
+
 ## Forking the repo:  
 1. Clone the project
 ```
