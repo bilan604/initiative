@@ -72,5 +72,61 @@ python3 -m venv myenv
 source myenv/bin/activate
 ```
 
-3. Install the dependencies and run main.py.  
+3. Install the dependencies
+```
+pip freeze > requirements.txt
+pip install -r requirements.txt
+```
+
+## Host a server on the web:  
+
+1. Go to https://www.pythonanywhere.com/ and create a web app.
+
+2. Open the bash console, switch to your user directory, and clone this repo.
+```
+cd /home/[username]/
+git clone https://github.com/bilan604/initiative.git
+```
+
+3. Go to the control panel for the web app and edit the WSGI configuration file.
+```
+import os
+
+os.chdir('/home/[username]/initiative')
+
+from flask_app import app as application
+```
+
+4. Since most of the files in this repo are in the .gitignore, replace 'flask_app.py' with a base empty template to avoid import errors.
+```
+import os
+from flask import Flask
+from flask import session, request
+
+app = Flask(__name__)
+
+def handle(request):
+    pass
+
+@app.route("/api/", methods=("POST"))
+def api():
+    if request.method == "POST":
+        response = handle(request)
+        return json.dumps({
+            "message": "The format for a get response from API"
+        })
+    return json.dumps({
+            "message": "Request method not supported"
+        })
+
+@app.route("/", methods=("GET"))
+def hello_world():
+    if request.method == "GET":
+        return "Hello World!"
+
+def run_app():
+    os.chdir(os.getcwd())
+    app.run()
+```
+
 
