@@ -51,7 +51,7 @@ response:
     }
 '''
 
-#### CURL Example:
+#### CURL Example:  
 ```
 curl -X POST "https://bilan604.pythonanywhere.com/api/" \
      -H "Content-Type: application/json" \
