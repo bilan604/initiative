@@ -13,7 +13,7 @@ Some features of ProjectsAPI:
 3. Allows headless VM instances to make updates via post requests to the website.  
 4. Act as a control panel for active bots.  
 
-https://github.com/bilan604/initiative/blob/main/assets/pythonanywhere.png
+![PythonAnywhere Image](https://raw.githubusercontent.com/bilan604/initiative/main/assets/pythonanywhere.png)
 
 ## Examples:  
 
