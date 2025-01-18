@@ -59,6 +59,8 @@ curl -X POST "https://bilan604.pythonanywhere.com/api/" \
      -d '{ "id": "bilan604", "operation": "btc_price", "request_data": {"currency": "USD"}}'
 ```
 
+![benjamin btd6](https://static.wikia.nocookie.net/b__/images/a/af/BenjaminPortrait.png/revision/latest/smart/width/400/height/225?cb=20190612025211&path-prefix=bloons)
+
 ## Forking the repo:  
 1. Clone the project
 ```
