@@ -10,9 +10,6 @@ src/generic/*
 src/handler/*
 src/operator/*
 
-templates/
-templates/*
-
 !src/generic/__init__.py
 !src/generic/chat.py
 !src/generic/sheets.py
